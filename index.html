@@ -957,8 +957,11 @@ function closeAllCals(){
 function sv(id,btn){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
   document.querySelectorAll('.nt').forEach(b=>b.classList.remove('on'));
-  document.getElementById('v'+id).classList.add('on');btn.classList.add('on');
+  const viewEl = document.getElementById('v'+id);
+  if(viewEl) viewEl.classList.add('on');
+  if(btn) btn.classList.add('on');
   if(id==='d')rdash();if(id==='l')rtable();if(id==='r')rreports();
+  if(id==='ai')setTimeout(function(){if(typeof loadCurrentCategories==='function')loadCurrentCategories();},100);
 }
 function setT(t){
   TYPE=t;
@@ -2589,15 +2592,6 @@ function copyAICode(code) {
 function showHowToAdd() {
   toast('💡 Open Kafeel_Books_App.html in a text editor, find the <select id="cat"> section, and paste the code in the appropriate <optgroup>');
 }
-
-// Load categories when AI view is shown
-const originalSV = sv;
-sv = function(view, btn) {
-  originalSV(view, btn);
-  if (view === 'ai') {
-    setTimeout(loadCurrentCategories, 100);
-  }
-};
 </script>
 
 <!-- GOOGLE DRIVE BAR (appended to body, shown at bottom) -->
