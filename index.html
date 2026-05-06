@@ -1,0 +1,2794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kafeel Books — كتب كفيل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F7FA;--bg2:#FFFFFF;--bg3:#EEF1F6;--bg4:#E2E7EF;--bg5:#D5DCE8;
+  --border:rgba(0,0,0,0.08);--border2:rgba(14,120,100,0.35);--border3:rgba(0,0,0,0.12);
+  --teal:#0E7864;--teal2:#0A5E4E;--teal3:rgba(14,120,100,0.1);--teal4:rgba(14,120,100,0.05);
+  --amber:#C27A10;--amber2:rgba(194,122,16,0.12);--amber3:rgba(194,122,16,0.06);
+  --red:#C03030;--red2:rgba(192,48,48,0.1);--red3:rgba(192,48,48,0.05);
+  --green:#1A7A40;--green2:rgba(26,122,64,0.1);--green3:rgba(26,122,64,0.05);
+  --text:#1A2535;--text2:#4A6080;--text3:#7A90A8;--text4:#A0B0C0;
+  --mono:'JetBrains Mono',monospace;--sans:'Tajawal',sans-serif;
+  --r:10px;--r2:6px;--r3:4px;--sh:0 4px 20px rgba(0,0,0,0.12);
+}
+html,body{height:100%;overflow:hidden}body{display:flex;flex-direction:column}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px}
+.nav{height:50px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:0;z-index:10;position:relative}
+.logo{font-family:var(--mono);font-size:13px;letter-spacing:.08em;margin-right:24px;white-space:nowrap}
+.logo .a{color:var(--teal)}.logo .d{color:var(--text3);font-size:10px}
+.ntabs{display:flex;gap:2px;flex:1}
+.nt{font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:6px 13px;border-radius:var(--r3);cursor:pointer;color:var(--text3);transition:.15s;border:none;background:none;white-space:nowrap}
+.nt:hover{color:var(--text2);background:var(--bg3)}
+.nt.on{color:var(--teal);background:var(--teal4);border:1px solid var(--border2)}
+.nright{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nc{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.expbtn{font-family:var(--mono);font-size:9px;padding:5px 11px;background:var(--bg3);border:1px solid var(--border3);color:var(--text2);border-radius:var(--r3);cursor:pointer;transition:.15s}
+.expbtn:hover{border-color:var(--teal);color:var(--teal)}
+.npill{font-family:var(--mono);font-size:9px;padding:3px 9px;border-radius:20px;background:var(--teal3);color:var(--teal);border:1px solid var(--border2)}
+.view{display:none;height:calc(100vh - 94px);overflow:hidden}
+.view.on{display:flex}
+#ve{grid-template-columns:1fr 300px}
+#ve.on{display:grid}
+.fscroll{overflow-y:auto;padding:20px 22px}
+.fscroll::-webkit-scrollbar{width:4px}
+.fscroll::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+.sec{margin-bottom:18px}
+.slbl{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.slbl::after{content:'';flex:1;height:.5px;background:var(--border)}
+.sn{width:16px;height:16px;border-radius:50%;background:var(--bg4);border:1px solid var(--border3);font-size:8px;display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0}
+.trow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.ttab{background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--r);padding:11px 6px;cursor:pointer;text-align:center;transition:all .15s;user-select:none}
+.ttab:hover{border-color:var(--text3)}
+.ttab.ts.on{border-color:var(--green);background:var(--green3);box-shadow:0 0 0 1px var(--green)}
+.ttab.tp.on{border-color:var(--amber);background:var(--amber3);box-shadow:0 0 0 1px var(--amber)}
+.ttab.te.on{border-color:var(--red);background:var(--red3);box-shadow:0 0 0 1px var(--red)}
+.tico{font-size:17px;margin-bottom:3px;line-height:1}
+.ten{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--text2)}
+.tar{font-size:11px;color:var(--text3);margin-top:1px}
+.dmode{display:flex;gap:5px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:3px;margin-bottom:10px}
+.dmb{flex:1;font-family:var(--mono);font-size:10px;padding:7px;border-radius:var(--r2);border:none;background:transparent;color:var(--text2);cursor:pointer;transition:.15s;text-align:center}
+.dmb.on{background:var(--teal3);color:var(--teal);border:1px solid var(--border2)}
+/* Calendar trigger fields */
+.cal-trigger{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.cal-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.cal-field{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);padding:9px 12px;cursor:pointer;transition:border-color .15s;user-select:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-field:hover,.cal-field.open{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal3)}
+.cal-field.hamber:hover,.cal-field.hamber.open{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber2)}
+.cf-val{font-size:13px;color:var(--text3);flex:1}
+.cf-val.set{color:var(--text)}
+.cf-ico{font-size:13px;opacity:.5;flex-shrink:0}
+/* Calendar popup shared */
+.cal-popup{position:absolute;top:calc(100% + 6px);left:0;z-index:1000;border-radius:var(--r);box-shadow:var(--sh);animation:popIn .15s ease;width:300px}
+.cal-popup.right{left:auto;right:0}
+@keyframes popIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+/* Gregorian */
+.gcal{background:var(--bg2);border:1px solid var(--border3)}
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.cal-nav-btn{width:28px;height:28px;border-radius:var(--r3);background:var(--bg4);border:1px solid var(--border);color:var(--text2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.cal-nav-btn:hover{border-color:var(--teal);color:var(--teal)}
+.cal-nav-btn.hamber:hover{border-color:var(--amber);color:var(--amber)}
+.cal-title{font-family:var(--mono);font-size:11px;color:var(--text);text-align:center}
+.cal-title-sub{font-size:9px;color:var(--text3);text-align:center;margin-top:1px}
+.cal-dheader{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:7px 10px 3px}
+.cal-dh{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--text3);text-align:center}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:3px 10px 10px}
+.gday{height:32px;border-radius:var(--r3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;cursor:pointer;transition:all .1s;color:var(--text2)}
+.gday:hover{background:var(--bg4);color:var(--text)}
+.gday.other{color:var(--text4);pointer-events:none}
+.gday.today{border:1px solid var(--border2);color:var(--teal)}
+.gday.gsel{background:var(--teal);color:var(--bg);font-weight:600}
+.gday.gin{background:var(--teal3);color:var(--teal)}
+.gday.grng-s{background:var(--teal);color:var(--bg);border-radius:var(--r3) 0 0 var(--r3);font-weight:600}
+.gday.grng-e{background:var(--teal);color:var(--bg);border-radius:0 var(--r3) var(--r3) 0;font-weight:600}
+/* Hijri day */
+.hday{height:36px;border-radius:var(--r3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .1s;gap:1px}
+.hday:hover{background:var(--bg4)}
+.hday .hn{font-family:var(--mono);font-size:11px;color:var(--text2)}
+.hday .hg{font-family:var(--mono);font-size:8px;color:var(--text4)}
+.hday.hsel .hn,.hday.hrng-s .hn,.hday.hrng-e .hn{color:var(--bg);font-weight:600}
+.hday.hsel .hg,.hday.hrng-s .hg,.hday.hrng-e .hg{color:rgba(9,16,28,.6)}
+.hday.hsel{background:var(--amber)}
+.hday.hrng-s{background:var(--amber);border-radius:var(--r3) 0 0 var(--r3)}
+.hday.hrng-e{background:var(--amber);border-radius:0 var(--r3) var(--r3) 0}
+.hday.hin{background:var(--amber2)}
+.hday.hin .hn{color:var(--amber)}
+.hday.hother{opacity:.2;pointer-events:none}
+/* Calendar footer */
+.cal-foot{padding:8px 12px;border-top:1px solid var(--border);display:flex;gap:6px;justify-content:space-between;align-items:center}
+.cal-btn{font-family:var(--mono);font-size:9px;padding:5px 11px;border-radius:var(--r3);border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:.15s}
+.cal-btn:hover{border-color:var(--teal);color:var(--teal)}
+.cal-btn.pri{background:var(--teal);color:var(--bg);border-color:var(--teal)}
+.cal-btn.pri:hover{background:var(--teal2)}
+.cal-btn.apri{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.cal-foot-info{font-family:var(--mono);font-size:9px;color:var(--text3)}
+/* hint */
+.dhint{font-family:var(--mono);font-size:9px;padding:4px 10px;border-radius:var(--r3);display:inline-flex;align-items:center;gap:6px;margin-top:5px}
+.dhok{background:var(--teal3);color:var(--teal);border:1px solid var(--border2)}
+.dhwarn{background:var(--amber2);color:var(--amber);border:1px solid rgba(240,160,80,.3)}
+.dherr{background:var(--red2);color:var(--red);border:1px solid rgba(224,96,96,.3)}
+/* relative wrap for calendar */
+.calwrap{position:relative}
+.overlay{position:fixed;inset:0;z-index:500;display:none}
+.overlay.on{display:block}
+/* fields */
+.fld{margin-bottom:11px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.fl{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-bottom:5px;display:flex;justify-content:space-between}
+.fl .ar{font-family:var(--sans);text-transform:none;letter-spacing:0;color:var(--text3);font-size:10px}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:var(--sans);font-size:13px;padding:9px 11px;transition:border-color .15s,box-shadow .15s;outline:none;appearance:none;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal3)}
+input::placeholder{color:var(--text4)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6080' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+select option{background:var(--bg2)}
+textarea{resize:vertical;min-height:50px}
+.vcrd{border-radius:var(--r);padding:12px 14px;margin-bottom:13px;border:1.5px solid var(--border);background:var(--bg3);transition:all .2s;display:flex;align-items:center;gap:12px}
+.vcrd.on{border-color:var(--amber);background:var(--amber3)}
+.vinfo{flex:1}
+.vtitle{font-size:13px;color:var(--text);margin-bottom:2px}
+.vsub{font-size:11px;color:var(--text3);line-height:1.4}
+.ck{position:relative;width:44px;height:24px;flex-shrink:0}
+.ck input{opacity:0;width:0;height:0;position:absolute}
+.ckt{position:absolute;inset:0;background:var(--bg4);border:1px solid var(--border3);border-radius:12px;cursor:pointer;transition:.2s}
+.ckt::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text3);transition:.2s}
+.ck input:checked~.ckt{background:var(--amber3);border-color:var(--amber)}
+.ck input:checked~.ckt::after{transform:translateX(20px);background:var(--amber)}
+.vbdg{font-family:var(--mono);font-size:9px;padding:3px 9px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.vby{background:var(--amber2);color:var(--amber);border:1px solid rgba(240,160,80,.4)}
+.vbn{background:var(--bg4);color:var(--text3);border:1px solid var(--border)}
+.ccrd{background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);padding:13px;margin-bottom:13px}
+.crow{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:.5px solid var(--border)}
+.crow:last-child{border-bottom:none}
+.clbl{font-family:var(--mono);font-size:10px;color:var(--text2)}
+.clbl .ar{font-family:var(--sans);font-size:9px;color:var(--text3)}
+.cval{font-family:var(--mono);font-size:12px;font-weight:500}
+.cw{color:var(--text)}.ca{color:var(--amber)}.ct{color:var(--teal)}.cg{color:var(--green)}
+.cdiv{height:.5px;background:var(--border2);margin:6px 0}
+.cnote{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:10px;color:var(--text2)}
+.cdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.cdt{background:var(--teal)}.cda{background:var(--amber)}
+.sbtn{width:100%;padding:13px;border:none;border-radius:var(--r);font-family:var(--mono);font-size:11px;letter-spacing:.1em;cursor:pointer;transition:all .18s;font-weight:600}
+.sbs{background:var(--green);color:#071A0F}.sbs:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 4px 16px rgba(108,196,138,.3)}
+.sbp{background:var(--amber);color:#1C0A00}.sbp:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 4px 16px rgba(240,160,80,.3)}
+.sbe{background:var(--red);color:#fff}.sbe:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 16px rgba(224,96,96,.3)}
+.side{background:var(--bg2);border-left:1px solid var(--border);overflow-y:auto;padding:15px}
+.side::-webkit-scrollbar{width:3px}
+.side::-webkit-scrollbar-thumb{background:var(--bg4)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
+.kpi{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px}
+.kl{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.kv{font-family:var(--mono);font-size:15px;font-weight:500}
+.kar{font-size:9px;color:var(--text3);margin-top:2px}
+.kvt{color:var(--teal)}.kvr{color:var(--red)}.kvg{color:var(--green)}.kva{color:var(--amber)}
+.vsm{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.vsh{background:var(--bg4);padding:8px 12px;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--text2)}
+.vsr{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-top:.5px solid var(--border)}
+.vsl{font-size:11px;color:var(--text2)}.vsl .ar{font-size:9px;color:var(--text3)}
+.vsv{font-family:var(--mono);font-size:11px;font-weight:500}
+.lcard{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.lh{background:var(--bg4);padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.lht{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--text2)}
+.lcbtn{font-family:var(--mono);font-size:9px;background:none;border:1px solid var(--border);color:var(--text3);padding:2px 8px;border-radius:var(--r3);cursor:pointer;transition:.15s}
+.lcbtn:hover{border-color:var(--red);color:var(--red)}
+.lempty{padding:20px;text-align:center;color:var(--text3);font-family:var(--mono);font-size:10px;line-height:2}
+.li{display:grid;grid-template-columns:8px 1fr auto;gap:8px;align-items:center;padding:8px 12px;border-top:.5px solid var(--border);transition:background .1s}
+.li:hover{background:var(--bg4)}
+.ldot{width:7px;height:7px;border-radius:50%}
+.ldg{background:var(--green)}.lda{background:var(--amber)}.ldr{background:var(--red)}
+.ldesc{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lmeta{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:1px}
+.lamt{font-family:var(--mono);font-size:11px;font-weight:500;white-space:nowrap}
+#vd.on{flex-direction:column;overflow-y:auto;padding:20px;gap:16px}
+.dkrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.dk{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.dkl{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
+.dkv{font-family:var(--mono);font-size:24px;font-weight:500}
+.dkar{font-size:10px;color:var(--text3);margin-top:3px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.dc h3{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--border);font-size:12px}
+.dr:last-child{border-bottom:none}.dr.tot{font-weight:500;border-top:1px solid var(--border2);margin-top:3px;padding-top:7px}
+.dl{color:var(--text2)}.dv{font-family:var(--mono);font-size:11px}
+#vl.on{flex-direction:column;overflow-y:auto;padding:18px}
+.tw{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:var(--bg4);padding:9px 13px;text-align:left;font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:.5px solid var(--border);transition:background .1s}
+tbody tr:hover{background:var(--bg3)}
+tbody td{padding:8px 13px;color:var(--text);vertical-align:middle}
+.tag{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:20px;white-space:nowrap}
+.tgs{background:var(--green2);color:var(--green)}.tgp{background:var(--amber2);color:var(--amber)}.tge{background:var(--red2);color:var(--red)}
+.tgv{background:var(--teal3);color:var(--teal)}.tgn{background:var(--bg4);color:var(--text3)}
+.nd{padding:28px;text-align:center;color:var(--text3);font-family:var(--mono);font-size:11px}
+.dbtn{font-family:var(--mono);font-size:9px;background:none;border:none;color:var(--text3);cursor:pointer;padding:3px 6px;border-radius:var(--r3);transition:.15s}
+.dbtn:hover{color:var(--red);background:var(--red2)}
+#vr.on{flex-direction:column;overflow-y:auto;padding:20px;gap:14px}
+.rc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.rc h3{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.rcell{background:var(--bg3);border-radius:var(--r2);padding:11px}
+.rclbl{font-size:10px;color:var(--text3);margin-bottom:3px}
+.rcval{font-family:var(--mono);font-size:13px;font-weight:500}
+.rcsub{font-size:9px;color:var(--text3);margin-top:2px}
+.toast{position:fixed;bottom:18px;right:18px;background:var(--bg2);border:1px solid var(--border2);box-shadow:0 4px 20px rgba(0,0,0,0.15);border-radius:var(--r);padding:10px 16px;font-family:var(--mono);font-size:11px;color:var(--teal);display:flex;align-items:center;gap:7px;transform:translateY(60px);opacity:0;transition:all .28s cubic-bezier(.34,1.56,.64,1);z-index:9999;pointer-events:none;box-shadow:var(--sh)}
+.toast.on{transform:translateY(0);opacity:1}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+@media(max-width:720px){#ve.on{grid-template-columns:1fr}.side{display:none}.dkrow{grid-template-columns:1fr 1fr}.dgrid{grid-template-columns:1fr}.rg{grid-template-columns:1fr 1fr}}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+
+/* Light mode overrides */
+.nav{box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.cal-popup{border:1px solid var(--border3);box-shadow:0 4px 24px rgba(0,0,0,0.12)}
+.hday .hn{color:var(--text)}
+.hday .hg{color:var(--text3)}
+.gday{color:var(--text2)}
+.gday:hover{background:var(--bg4);color:var(--text)}
+.gday.other{color:var(--text4)}
+.gday.today{border:1px solid var(--border2);color:var(--teal)}
+.gday.gsel{background:var(--teal);color:#fff;font-weight:600}
+.gday.gin{background:var(--teal3);color:var(--teal)}
+.gday.grng-s{background:var(--teal);color:#fff}
+.gday.grng-e{background:var(--teal);color:#fff}
+.hday:hover{background:var(--bg4)}
+.hday.hsel{background:var(--amber)}
+.hday.hsel .hn,.hday.hrng-s .hn,.hday.hrng-e .hn{color:#fff}
+.hday.hrng-s{background:var(--amber)}.hday.hrng-e{background:var(--amber)}
+.hday.hin{background:var(--amber2)}.hday.hin .hn{color:var(--amber)}
+.hday.hother{opacity:.3}
+.lcard,.vsm,.kpi{box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.ttab{box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.ccrd{background:var(--bg3)}
+.vcrd{box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+
+/* ── GOOGLE DRIVE PANEL ── */
+.gd-bar{background:var(--bg2);border-top:1px solid var(--border);padding:8px 18px;display:flex;align-items:center;gap:12px;font-size:12px;height:44px}
+.gd-status{display:flex;align-items:center;gap:7px;flex:1}
+.gd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;transition:background .3s}
+.gd-dot.grey{background:var(--text4)}
+.gd-dot.green{background:var(--green);box-shadow:0 0 0 3px var(--green3)}
+.gd-dot.amber{background:var(--amber);animation:pulse 1.2s infinite}
+.gd-dot.red{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.gd-msg{color:var(--text2);font-family:var(--mono);font-size:10px}
+.gd-btn{font-family:var(--mono);font-size:9px;padding:5px 12px;border-radius:var(--r3);border:1px solid var(--border3);background:var(--bg3);color:var(--text2);cursor:pointer;transition:.15s;white-space:nowrap}
+.gd-btn:hover{border-color:var(--teal);color:var(--teal)}
+.gd-btn.pri{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gd-btn.pri:hover{background:var(--teal2)}
+.gd-btn.danger{border-color:var(--red2);color:var(--red)}
+.gd-btn.danger:hover{background:var(--red2)}
+.gd-divider{width:1px;height:20px;background:var(--border);flex-shrink:0}
+.gd-user{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
+.gd-avatar{width:22px;height:22px;border-radius:50%;border:1px solid var(--border2)}
+/* backup modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:2000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal{background:var(--bg2);border:1px solid var(--border3);border-radius:var(--r);padding:24px;width:480px;max-width:90vw;box-shadow:0 16px 48px rgba(0,0,0,0.2)}
+.modal h2{font-family:var(--mono);font-size:13px;color:var(--text);margin-bottom:6px;letter-spacing:.06em}
+.modal .sub{font-size:12px;color:var(--text2);margin-bottom:18px;line-height:1.6}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.modal-step{background:var(--bg3);border-radius:var(--r2);padding:12px 14px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px}
+.modal-step-num{width:20px;height:20px;border-radius:50%;background:var(--teal3);color:var(--teal);border:1px solid var(--border2);font-family:var(--mono);font-size:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.modal-step-txt{font-size:12px;color:var(--text2);line-height:1.5}
+.modal-step-txt b{color:var(--text);font-weight:500}
+.modal-step-txt a{color:var(--teal);text-decoration:none}
+.modal-step-txt a:hover{text-decoration:underline}
+.backup-list{max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r2);margin-top:10px}
+.backup-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:.5px solid var(--border);font-size:12px}
+.backup-item:last-child{border-bottom:none}
+.backup-item:hover{background:var(--bg3)}
+.backup-name{color:var(--text);font-family:var(--mono);font-size:10px}
+.backup-date{color:var(--text3);font-size:10px}
+.backup-restore{font-family:var(--mono);font-size:9px;background:none;border:1px solid var(--border);color:var(--text2);padding:2px 8px;border-radius:var(--r3);cursor:pointer;transition:.15s}
+.backup-restore:hover{border-color:var(--teal);color:var(--teal)}
+
+/* ── ATTACHMENTS ── */
+.att-zone{border:1.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:16px;text-align:center;cursor:pointer;transition:all .18s;background:var(--color-background-secondary);margin-bottom:12px;position:relative}
+.att-zone:hover,.att-zone.drag{border-color:var(--color-border-info);background:var(--color-background-info)}
+.att-zone-ico{font-size:24px;margin-bottom:6px;display:block}
+.att-zone-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.att-zone-sub{font-size:11px;color:var(--color-text-secondary)}
+.att-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.att-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.att-item{display:grid;grid-template-columns:32px 1fr auto;gap:8px;align-items:center;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 10px}
+.att-thumb{width:32px;height:32px;border-radius:var(--border-radius-md);object-fit:cover;border:0.5px solid var(--color-border-tertiary)}
+.att-icon{width:32px;height:32px;border-radius:var(--border-radius-md);background:var(--color-background-tertiary);display:flex;align-items:center;justify-content:center;font-size:14px;border:0.5px solid var(--color-border-tertiary)}
+.att-info{min-width:0}
+.att-name{font-size:12px;font-weight:500;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.att-size{font-size:10px;color:var(--color-text-tertiary);font-family:var(--font-mono)}
+.att-type{font-size:9px;padding:1px 6px;border-radius:20px;display:inline-block;margin-left:4px;font-weight:500}
+.att-type.img{background:var(--color-background-success);color:var(--color-text-success)}
+.att-type.pdf{background:var(--color-background-danger);color:var(--color-text-danger)}
+.att-type.xls{background:var(--color-background-success);color:var(--color-text-success)}
+.att-type.doc{background:var(--color-background-info);color:var(--color-text-info)}
+.att-type.other{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.att-actions{display:flex;gap:4px;flex-shrink:0}
+.att-btn{width:26px;height:26px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:.15s;color:var(--color-text-secondary)}
+.att-btn:hover{border-color:var(--color-border-info);color:var(--color-text-info)}
+.att-btn.del:hover{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+/* Viewer modal */
+.viewer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px}
+.viewer-overlay.on{display:flex}
+.viewer-box{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);max-width:90vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);min-width:320px}
+.viewer-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.viewer-title{font-size:13px;font-weight:500;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px}
+.viewer-hdr-btns{display:flex;gap:6px;flex-shrink:0}
+.viewer-body{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:16px;min-height:200px}
+.viewer-body img{max-width:100%;max-height:70vh;border-radius:var(--border-radius-md)}
+.viewer-body iframe{width:700px;max-width:100%;height:70vh;border:none;border-radius:var(--border-radius-md)}
+.viewer-body .no-preview{text-align:center;color:var(--color-text-secondary);font-size:13px;padding:32px}
+/* Ledger attachment badge */
+.att-badge{font-family:var(--font-mono);font-size:9px;padding:1px 6px;border-radius:20px;background:var(--color-background-info);color:var(--color-text-info);margin-left:4px;cursor:pointer}
+.att-badge:hover{background:var(--color-border-info);color:#fff}
+/* Transaction detail panel in ledger */
+.tx-detail{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;margin:6px 0 10px 0;display:none}
+.tx-detail.on{display:block}
+.tx-detail-atts{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;margin-top:8px}
+.tx-att-thumb{border-radius:var(--border-radius-md);overflow:hidden;cursor:pointer;border:0.5px solid var(--color-border-tertiary);transition:.15s}
+.tx-att-thumb:hover{border-color:var(--color-border-info);transform:scale(1.03)}
+.tx-att-thumb img{width:100%;height:60px;object-fit:cover;display:block}
+.tx-att-thumb .file-icon{width:100%;height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--color-background-tertiary);font-size:18px;gap:2px}
+.tx-att-thumb .file-lbl{font-size:9px;color:var(--color-text-secondary);font-family:var(--font-mono);padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;display:block}
+
+/* ── EXPORT SYSTEM ── */
+.exp-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:4000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.exp-modal-overlay.on{display:flex}
+.exp-modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);width:520px;max-width:95vw;box-shadow:0 16px 48px rgba(0,0,0,0.2);overflow:hidden}
+.exp-modal-hdr{background:var(--color-background-secondary);padding:16px 20px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
+.exp-modal-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.exp-modal-body{padding:20px}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.exp-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;cursor:pointer;transition:all .18s;text-align:center;position:relative;overflow:hidden}
+.exp-card:hover{border-color:var(--color-border-info);background:var(--color-background-info);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.exp-card.active{border-color:var(--color-border-info);background:var(--color-background-info)}
+.exp-card-ico{font-size:28px;margin-bottom:8px;display:block}
+.exp-card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.exp-card-sub{font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+.exp-card-badge{position:absolute;top:8px;right:8px;font-size:9px;padding:2px 7px;border-radius:20px;background:var(--color-background-success);color:var(--color-text-success);font-weight:500}
+.exp-options{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;margin-bottom:14px;display:none}
+.exp-options.on{display:block}
+.exp-opt-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono)}
+.exp-check-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer}
+.exp-check-row input[type=checkbox]{width:15px;height:15px;accent-color:var(--color-text-info);cursor:pointer}
+.exp-check-row label{font-size:12px;color:var(--color-text-primary);cursor:pointer}
+.exp-period{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.exp-period select,.exp-period input{font-size:12px;padding:7px 10px}
+.exp-footer{display:flex;gap:8px;justify-content:flex-end;padding-top:12px;border-top:0.5px solid var(--color-border-tertiary)}
+.exp-btn{font-family:var(--font-mono);font-size:10px;padding:8px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:.15s;letter-spacing:.04em}
+.exp-btn:hover{border-color:var(--color-border-secondary);color:var(--color-text-primary)}
+.exp-btn.pri{background:var(--color-text-info);color:#fff;border-color:var(--color-text-info)}
+.exp-btn.pri:hover{opacity:.9}
+/* Reports toolbar */
+.rpt-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.rpt-toolbar h2{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.rpt-toolbar-btns{display:flex;gap:6px}
+.rpt-btn{font-family:var(--font-mono);font-size:9px;padding:6px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:.15s}
+.rpt-btn:hover{border-color:var(--color-border-info);color:var(--color-text-info)}
+.rpt-btn.green{border-color:var(--color-border-success);color:var(--color-text-success);background:var(--color-background-success)}
+/* Print styles */
+@media print{
+  .nav,.gd-bar,#ve,#vd,#vl,.exp-modal-overlay,.viewer-overlay{display:none!important}
+  #vr{display:block!important;height:auto!important;overflow:visible!important;padding:0!important}
+  .rpt-toolbar{display:none!important}
+  .rc{break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important}
+  body{background:#fff!important;color:#000!important}
+  .rcval{color:#000!important}
+  .rclbl{color:#555!important}
+}
+
+/* ── YEAR SWITCHER ── */
+.yr-pill{font-family:var(--font-mono);font-size:10px;padding:4px 10px;border-radius:20px;background:var(--color-background-success);color:var(--color-text-success);border:0.5px solid var(--color-border-success);cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;white-space:nowrap}
+.yr-pill:hover{background:var(--color-background-success);filter:brightness(1.05)}
+.yr-picker{position:absolute;top:54px;left:50%;transform:translateX(-50%);z-index:500;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);box-shadow:0 8px 32px rgba(0,0,0,0.15);width:380px;max-width:95vw;overflow:hidden;animation:popIn .15s ease}
+.yp-hdr{background:var(--color-background-secondary);padding:12px 16px;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.yp-hdr .sub{font-size:10px;color:var(--color-text-tertiary);margin-top:2px;font-weight:400}
+.yp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}
+.yp-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;cursor:pointer;transition:.15s}
+.yp-card:hover{border-color:var(--color-border-info);background:var(--color-background-info)}
+.yp-card.current{border-color:var(--color-border-success);background:var(--color-background-success)}
+.yp-yr{font-family:var(--font-mono);font-size:16px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px}
+.yp-card.current .yp-yr{color:var(--color-text-success)}
+.yp-greg{font-size:10px;color:var(--color-text-tertiary);margin-bottom:6px}
+.yp-summary{font-size:10px;color:var(--color-text-secondary)}
+.yp-badge{font-size:9px;padding:1px 7px;border-radius:20px;background:var(--color-background-success);color:var(--color-text-success);font-weight:500;display:inline-block;margin-top:4px}
+.yp-footer{padding:10px 12px;border-top:0.5px solid var(--color-border-tertiary);font-size:11px;color:var(--color-text-tertiary);text-align:center}
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="closeAllCals()"></div>
+<nav class="nav">
+  <div class="logo" style="display:flex;align-items:center;gap:10px">KAFEEL<span class="a">_BOOKS</span><button class="yr-pill" id="yr-pill-btn" onclick="openYearPicker()"><span id="logo-year">1446هـ</span> <span style="opacity:.6;font-size:8px">▾</span></button></div>
+  <div class="ntabs">
+    <button class="nt on" onclick="sv('e',this)">ENTRY — إدخال</button>
+    <button class="nt" onclick="sv('d',this)">DASHBOARD — لوحة</button>
+    <button class="nt" onclick="sv('l',this)">LEDGER — سجل</button>
+    <button class="nt" onclick="sv('r',this)">REPORTS — تقارير</button>
+    <button class="nt" onclick="sv('ai',this)">🤖 AI MANAGER — إدارة الفئات</button>
+  </div>
+  <div class="nright">
+    <span class="nc" id="nc">0 entries</span>
+    <button class="expbtn" onclick="openExpModal()">↓ Export</button><button class="expbtn" onclick="exportJSON()" title="Download JSON backup">↓ JSON</button><button class="expbtn" onclick="importJSON()" title="Import from JSON backup">↑ Import</button>
+    <span class="npill">EN | عربي</span>
+  </div>
+</nav>
+
+<!-- YEAR PICKER -->
+<div class="yr-picker" id="yr-picker" style="display:none">
+  <div class="yp-hdr">
+    Select Hijri Year — اختر السنة الهجرية
+    <div class="sub">Each year has its own data, calendar, and VAT deadlines</div>
+  </div>
+  <div class="yp-grid" id="yp-grid"></div>
+  <div class="yp-footer">Data for each year is stored separately — بيانات كل سنة مستقلة</div>
+</div>
+
+
+<div class="view on" id="ve">
+<div class="fscroll">
+
+<div class="sec">
+  <div class="slbl"><span class="sn">1</span>Transaction type — نوع المعاملة</div>
+  <div class="trow">
+    <div class="ttab ts on" id="tbs" onclick="setT('s')"><div class="tico">📈</div><div class="ten">SALES</div><div class="tar">مبيعات</div></div>
+    <div class="ttab tp" id="tbp" onclick="setT('p')"><div class="tico">📦</div><div class="ten">PURCHASE</div><div class="tar">مشتريات</div></div>
+    <div class="ttab te" id="tbe" onclick="setT('e')"><div class="tico">🏛️</div><div class="ten">EXPENSE</div><div class="tar">مصروف</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="slbl"><span class="sn">2</span>Date — التاريخ</div>
+  <div class="dmode">
+    <button class="dmb on" id="dmg" onclick="setDM('g')">📅 Gregorian — ميلادي</button>
+    <button class="dmb" id="dmh" onclick="setDM('h')">🌙 Hijri <span id='h-yr-lbl'>1446</span> — هجري</button>
+  </div>
+  <div id="gpanel">
+    <div class="calwrap" id="gcalwrap">
+      <div class="cal-trigger">
+        <div>
+          <div class="cal-lbl">From date — من تاريخ</div>
+          <div class="cal-field" id="gfbtn" onclick="openGCal('f')">
+            <span class="cf-val" id="gfval">Select date</span>
+            <span class="cf-ico">📅</span>
+          </div>
+        </div>
+        <div>
+          <div class="cal-lbl">To date — إلى تاريخ</div>
+          <div class="cal-field" id="gtbtn" onclick="openGCal('t')">
+            <span class="cf-val" id="gtval">Select date</span>
+            <span class="cf-ico">📅</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-popup gcal" id="gcal" style="display:none">
+        <div class="cal-hdr">
+          <button class="cal-nav-btn" onclick="gNav(-1)">‹</button>
+          <div><div class="cal-title" id="gctitle"></div></div>
+          <button class="cal-nav-btn" onclick="gNav(1)">›</button>
+        </div>
+        <div class="cal-dheader"><div class="cal-dh">Su</div><div class="cal-dh">Mo</div><div class="cal-dh">Tu</div><div class="cal-dh">We</div><div class="cal-dh">Th</div><div class="cal-dh">Fr</div><div class="cal-dh">Sa</div></div>
+        <div class="cal-grid" id="gcgrid"></div>
+        <div class="cal-foot">
+          <div><button class="cal-btn" onclick="gClear()">Clear</button></div>
+          <div style="display:flex;gap:5px"><button class="cal-btn" onclick="gToday()">Today</button><button class="cal-btn pri" onclick="closeAllCals()">Done ✓</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="ghint" class="dhint dhok" style="display:none"></div>
+  </div>
+  <div id="hpanel" style="display:none">
+    <div class="calwrap" id="hcalwrap">
+      <div class="cal-trigger">
+        <div>
+          <div class="cal-lbl">From — من الشهر الهجري</div>
+          <div class="cal-field hamber" id="hfbtn" onclick="openHCal('f')">
+            <span class="cf-val" id="hfval">Select Hijri date</span>
+            <span class="cf-ico">🌙</span>
+          </div>
+        </div>
+        <div>
+          <div class="cal-lbl">To — إلى الشهر الهجري</div>
+          <div class="cal-field hamber" id="htbtn" onclick="openHCal('t')">
+            <span class="cf-val" id="htval">Select Hijri date</span>
+            <span class="cf-ico">🌙</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-popup gcal" id="hcal" style="display:none;width:320px">
+        <div class="cal-hdr">
+          <button class="cal-nav-btn hamber" onclick="hNav(-1)">‹</button>
+          <div style="text-align:center">
+            <div class="cal-title" id="hcen"></div>
+            <div style="font-size:13px;color:var(--amber);direction:rtl" id="hcar"></div>
+            <div class="cal-title-sub" id="hcgreg"></div>
+          </div>
+          <button class="cal-nav-btn hamber" onclick="hNav(1)">›</button>
+        </div>
+        <div class="cal-dheader"><div class="cal-dh">Su</div><div class="cal-dh">Mo</div><div class="cal-dh">Tu</div><div class="cal-dh">We</div><div class="cal-dh">Th</div><div class="cal-dh">Fr</div><div class="cal-dh">Sa</div></div>
+        <div class="cal-grid" id="hcgrid" style="grid-template-columns:repeat(7,1fr)"></div>
+        <div class="cal-foot">
+          <div style="display:flex;align-items:center;gap:6px"><span class="cal-foot-info" id="hcq"></span></div>
+          <div style="display:flex;gap:5px"><button class="cal-btn" onclick="hClear()">Clear</button><button class="cal-btn apri" onclick="closeAllCals()">Done ✓</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="hhint" class="dhint dhok" style="display:none"></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="slbl"><span class="sn">3</span>Category & branch — الفئة والفرع</div>
+  <div class="fld">
+    <div class="fl">Category <span class="ar">الفئة</span></div>
+    <select id="cat" onchange="onCat()">
+      <option value="">— Select category — اختر الفئة —</option>
+      <optgroup label="📈  Sales — مبيعات">
+        <option value="Sales-Branch1|s|y">Branch 1 sales — مبيعات الفرع الأول</option>
+        <option value="Sales-Branch2|s|y">Branch 2 sales — مبيعات الفرع الثاني</option>
+        <option value="Sales-Other|s|y">Other income — إيرادات أخرى</option>
+      </optgroup>
+      <optgroup label="📦  Purchases / COGS — مشتريات">
+        <option value="Purchases-Suppliers|p|y">Supplier purchases (food/grocery) — مشتريات موردين</option>
+        <option value="Packaging|p|y">Packaging &amp; bags — تغليف وأكياس</option>
+        <option value="Transport|p|y">Delivery / transport — نقل وشحن</option>
+      </optgroup>
+      <optgroup label="👥  Payroll — رواتب">
+        <option value="Salary-Saudi|e|n">Salary — Saudi employee — راتب سعودي</option>
+        <option value="Salary-NonSaudi|e|n">Salary — Non-Saudi — راتب غير سعودي</option>
+        <option value="GOSI|e|n">GOSI contributions — تأمينات اجتماعية</option>
+        <option value="EndOfService|e|n">End of service — مكافأة نهاية خدمة</option>
+      </optgroup>
+      <optgroup label="🏠  Occupancy — إيجار ومرافق">
+        <option value="Rent-Branch1|e|y">Rent — Branch 1 — إيجار الفرع الأول</option>
+        <option value="Rent-Branch2|e|y">Rent — Branch 2 — إيجار الفرع الثاني</option>
+        <option value="Electricity|e|y">Electricity (SEC) — كهرباء</option>
+        <option value="Water|e|n">Water (NWC) — مياه</option>
+      </optgroup>
+      <optgroup label="🏛️  Government Fees — رسوم حكومية">
+        <option value="Qiwa|e|n">Qiwa platform — قوى</option>
+        <option value="Jawazat|e|n">Jawazat / Iqama renewal — تجديد إقامة</option>
+        <option value="MunicipalLicense|e|n">Municipal license (Balady) — رخصة بلدية</option>
+        <option value="License24hr|e|n">24-hour license — رخصة 24 ساعة</option>
+        <option value="EstLicense|e|n">Establishment / CR license — رخصة منشأة</option>
+        <option value="CivilDefence|e|n">Civil defence certificate — شهادة دفاع مدني</option>
+        <option value="WorkPermit|e|n">Work permit / visa — تصريح عمل</option>
+        <option value="ExpatLevy|e|n">Expat levy SAR 800/month — رسوم عمالة وافدة</option>
+        <option value="Nitaqat|e|n">Nitaqat / Saudization — نطاقات</option>
+        <option value="LabourOffice|e|n">Labour office fees — وزارة الموارد البشرية</option>
+      </optgroup>
+      <optgroup label="🥗  Food Safety — سلامة غذاء">
+        <option value="SFDA|e|n">SFDA registration fee — رسوم SFDA</option>
+        <option value="HealthInspection|e|n">Health inspection (Balady) — تفتيش صحي</option>
+        <option value="HealthCertificate|e|n">Employee health certificate — شهادة صحة موظف</option>
+        <option value="FoodSafetyTraining|e|y">Food safety training — تدريب سلامة غذاء</option>
+        <option value="PestControl|e|y">Pest control — مكافحة حشرات</option>
+        <option value="WasteDisposal|e|y">Waste disposal — نفايات</option>
+      </optgroup>
+      <optgroup label="🏥  Medical &amp; HR — طبي وموارد بشرية">
+        <option value="MedicalInsurance|e|n">Medical insurance — تأمين طبي</option>
+        <option value="MedicalFitness|e|n">Medical fitness test — فحص طبي مسبق</option>
+        <option value="Recruitment|e|y">Recruitment agency fees — مكتب استقدام</option>
+        <option value="Uniform|e|y">Uniform &amp; PPE — زي موحد ومعدات</option>
+      </optgroup>
+      <optgroup label="💻  Technology — تقنية">
+        <option value="POS|e|y">POS / e-invoicing FATOORAH — فاتورة إلكترونية</option>
+        <option value="ERP|e|y">ERP / inventory software — برنامج مخزون</option>
+        <option value="CCTV|e|y">CCTV / security system — كاميرات مراقبة</option>
+        <option value="ScaleCalibration|e|y">Weighing scale calibration — معايرة موازين</option>
+      </optgroup>
+      <optgroup label="⚙️  Operations — تشغيل">
+        <option value="Telecom|e|y">Telecom / internet — اتصالات وإنترنت</option>
+        <option value="Maintenance|e|y">Maintenance &amp; repairs — صيانة وإصلاح</option>
+        <option value="Cleaning|e|y">Cleaning supplies — مستلزمات نظافة</option>
+        <option value="Security|e|y">Security services — خدمات أمن وحراسة</option>
+        <option value="Advertising|e|y">Advertising — دعاية وإعلان</option>
+      </optgroup>
+      <optgroup label="📋  Professional Fees — أتعاب مهنية">
+        <option value="Accountant|e|y">Accountant / bookkeeping — محاسب</option>
+        <option value="PRO|e|y">PRO / GRO services — علاقات حكومية</option>
+        <option value="Chamber|e|n">Chamber of commerce — غرفة تجارية</option>
+        <option value="VATFiling|e|y">VAT filing fees — رسوم تقديم ض.ق.م</option>
+        <option value="ZakatFiling|e|y">Zakat filing fees — رسوم تقديم زكاة</option>
+        <option value="BankCharges|e|n">Bank charges — رسوم بنكية</option>
+      </optgroup>
+      <optgroup label="🚚  Delivery — توصيل">
+        <option value="DeliveryPermit|e|n">Delivery permit (Balady) — رخصة توصيل</option>
+        <option value="DeliveryVehicle|e|y">Delivery vehicle costs — تكاليف مركبات</option>
+        <option value="PlatformCommission|e|y">Platform commission (Jahez etc.) — عمولة</option>
+      </optgroup>
+      <optgroup label="➕  Other — أخرى">
+        <option value="Other|e|y">Other expense — مصروف آخر</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="fg2">
+    <div>
+      <div class="fl">Branch <span class="ar">الفرع</span></div>
+      <select id="branch">
+        <option value="Both">Both branches — كلا الفرعين</option>
+        <option value="Branch1">Branch 1 — الفرع الأول</option>
+        <option value="Branch2">Branch 2 — الفرع الثاني</option>
+        <option value="NA">N/A — لا ينطبق</option>
+      </select>
+    </div>
+    <div>
+      <div class="fl">Invoice No. <span class="ar">رقم الفاتورة</span></div>
+      <input type="text" id="invoice" placeholder="INV-001">
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="slbl"><span class="sn">4</span>Details — التفاصيل</div>
+  <div class="fld">
+    <div class="fl">Description / Employee name <span class="ar">الوصف / اسم الموظف</span></div>
+    <input type="text" id="desc" placeholder="e.g. Zeshan — municipal health card">
+  </div>
+  <div class="fld">
+    <div class="fl">Supplier / Payee / Authority <span class="ar">المورد / الجهة</span></div>
+    <input type="text" id="supplier" placeholder="e.g. Tamimi, Landlord Al-Ahmad, Municipality">
+  </div>
+</div>
+
+<div class="sec">
+  <div class="slbl"><span class="sn">5</span>Amount &amp; VAT — المبلغ والضريبة</div>
+  <div class="fld">
+    <div class="fl">Amount excluding VAT (SAR) <span class="ar">المبلغ بدون ضريبة القيمة المضافة</span></div>
+    <input type="number" id="amount" placeholder="0.00" min="0" step="0.01" oninput="calc()">
+  </div>
+  <div class="vcrd" id="vcrd">
+    <div class="vinfo">
+      <div class="vtitle">VAT 15% applicable? — هل تشمل ضريبة القيمة المضافة؟</div>
+      <div class="vsub" id="vsub">Tick if the invoice shows 15% VAT</div>
+    </div>
+    <label class="ck"><input type="checkbox" id="vck" onchange="calc()"><div class="ckt"></div></label>
+    <span class="vbdg vbn" id="vbdg">NO VAT</span>
+  </div>
+  <div class="ccrd">
+    <div class="crow"><span class="clbl">Amount excl. VAT <span class="ar">بدون ضريبة</span></span><span class="cval cw" id="c1">SAR 0.00</span></div>
+    <div class="crow"><span class="clbl">VAT 15% <span class="ar">ضريبة 15%</span></span><span class="cval ca" id="c2">SAR 0.00</span></div>
+    <div class="crow"><span class="clbl" style="color:var(--text)">Total incl. VAT <span class="ar">الإجمالي</span></span><span class="cval ct" id="c3">SAR 0.00</span></div>
+    <div class="cdiv"></div>
+    <div class="cnote"><span class="cdot cdt"></span><span>Zakat base: </span><span class="cval ct" id="c4" style="margin-left:6px">SAR 0.00</span></div>
+    <div class="cnote"><span class="cdot cda"></span><span>VAT quarterly: </span><span class="cval ca" id="c5" style="margin-left:6px">SAR 0.00</span></div>
+  </div>
+
+<div class="sec">
+  <div class="slbl"><span class="sn">6</span>Attachments — المرفقات <span style="font-size:10px;color:var(--color-text-tertiary);font-weight:400;margin-left:4px">(photos, PDFs, Excel, ERP exports)</span></div>
+
+  <!-- Drop zone -->
+  <div class="att-zone" id="att-zone" ondragover="attDragOver(event)" ondragleave="attDragLeave()" ondrop="attDrop(event)">
+    <input type="file" id="att-input" multiple accept="image/*,.pdf,.xlsx,.xls,.csv,.doc,.docx,.json"
+      onchange="attFilesSelected(this.files)">
+    <span class="att-zone-ico">📎</span>
+    <div class="att-zone-title">Drop files here or click to browse</div>
+    <div class="att-zone-sub">Photos of receipts · PDF invoices · Excel from ERP · Supplier app exports<br>اسحب الملفات هنا أو انقر للتصفح — صور الفواتير وملفات PDF وExcel</div>
+  </div>
+
+  <!-- Pending attachments list -->
+  <div class="att-list" id="att-pending"></div>
+</div>
+  <div class="fld">
+    <div class="fl">Notes <span class="ar">ملاحظات</span></div>
+    <textarea id="notes" placeholder="Optional — ملاحظات اختيارية"></textarea>
+  </div>
+  <button class="sbtn sbs" id="sbtn" onclick="submit()">✦  ADD TO BOOKS — إضافة للسجلات</button>
+</div>
+</div>
+
+<div class="side">
+  <div class="slbl" style="margin-bottom:10px">Live — مباشر</div>
+  <div class="kgrid">
+    <div class="kpi"><div class="kl">Revenue</div><div class="kv kvt" id="k1">0.00</div><div class="kar">إيرادات</div></div>
+    <div class="kpi"><div class="kl">Expenses</div><div class="kv kvr" id="k2">0.00</div><div class="kar">مصروفات</div></div>
+    <div class="kpi"><div class="kl">Net Profit</div><div class="kv kvg" id="k3">0.00</div><div class="kar">صافي الربح</div></div>
+    <div class="kpi"><div class="kl">Zakat Est.</div><div class="kv kva" id="k4">0.00</div><div class="kar">تقدير زكاة</div></div>
+  </div>
+  <div class="vsm">
+    <div class="vsh">VAT — ملخص ض.ق.م</div>
+    <div class="vsr"><span class="vsl">Output <span class="ar">مخرجات</span></span><span class="vsv kvt" id="vs1">0.00</span></div>
+    <div class="vsr"><span class="vsl">Input <span class="ar">مدخلات</span></span><span class="vsv kvg" id="vs2">0.00</span></div>
+    <div class="vsr" style="background:var(--bg4)"><span class="vsl" style="color:var(--text)">Net payable <span class="ar">صافي</span></span><span class="vsv kva" id="vs3">0.00</span></div>
+    <div class="vsr"><span class="vsl">Zakat (2.5%) <span class="ar">زكاة</span></span><span class="vsv kva" id="vs4">0.00</span></div>
+  </div>
+  <div class="lcard">
+    <div class="lh"><span class="lht">Recent</span><button class="lcbtn" onclick="clearAll()">✕ clear</button></div>
+    <div id="lb"><div class="lempty">No entries yet<br><span style="font-family:var(--sans)">لا توجد إدخالات</span></div></div>
+  </div>
+</div>
+</div>
+
+<div class="view" id="vd">
+  <div class="dkrow">
+    <div class="dk"><div class="dkl">Total Revenue</div><div class="dkv kvt" id="dk1">0.00</div><div class="dkar">إجمالي الإيرادات</div></div>
+    <div class="dk"><div class="dkl">Total Expenses</div><div class="dkv kvr" id="dk2">0.00</div><div class="dkar">إجمالي المصروفات</div></div>
+    <div class="dk"><div class="dkl">Net Profit</div><div class="dkv kvg" id="dk3">0.00</div><div class="dkar">صافي الربح</div></div>
+    <div class="dk"><div class="dkl">Zakat Due (est.)</div><div class="dkv kva" id="dk4">0.00</div><div class="dkar">الزكاة التقديرية</div></div>
+  </div>
+  <div class="dgrid">
+    <div class="dc"><h3>VAT Summary — ملخص ض.ق.م</h3><div id="dvat"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+    <div class="dc"><h3>Expense Breakdown — تفصيل المصروفات</h3><div id="dexp"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+    <div class="dc"><h3>Revenue by Branch — حسب الفرع</h3><div id="drev"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+    <div class="dc"><h3>By Quarter — حسب الربع</h3><div id="dq"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+  </div>
+</div>
+
+<div class="view" id="vl">
+  <div class="tw">
+    <table>
+      <thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Supplier</th><th>Branch</th><th>Hijri</th><th>Q</th><th>VAT?</th><th style="text-align:right">Amount</th><th style="text-align:right">VAT</th><th style="text-align:right">Total</th><th>Files</th><th></th></tr></thead>
+      <tbody id="tb"><tr><td colspan="13" class="nd">No transactions — لا توجد معاملات</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="view" id="vr">
+  <div class="rpt-toolbar">
+    <h2>Reports — التقارير <span id="rpt-yr-hdr"></span></h2>
+    <div class="rpt-toolbar-btns">
+      <button class="rpt-btn" onclick="rreports()">🔄 Refresh</button>
+      <button class="rpt-btn" onclick="window.print()">🖨 Print / PDF</button>
+      <button class="rpt-btn green" onclick="openExpModal()">↓ Export Reports</button>
+    </div>
+  </div>
+  <div class="rc"><h3>Income Statement — قائمة الدخل <span id="rpt-inc-yr"></span></h3><div class="rg" id="ri"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+  <div class="rc"><h3>VAT Quarterly — ملخص الإقرار الضريبي</h3><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px" id="rvat"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+  <div class="rc"><h3>Zakat Calculation — حساب الزكاة</h3><div class="rg" id="rz"><div style="color:var(--text3);font-size:12px">No data</div></div></div>
+</div>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<script>const HIJRI_YEARS = {
+  1443: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2021-08-10', t:'2021-09-08', days:30, q:'Q1', dow:2},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2021-09-09', t:'2021-10-07', days:29, q:'Q1', dow:4},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2021-10-08', t:'2021-11-05', days:29, q:'Q1', dow:5},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2021-11-06', t:'2021-12-05', days:30, q:'Q2', dow:6},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2021-12-06', t:'2022-01-03', days:29, q:'Q2', dow:1},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2022-01-04', t:'2022-02-02', days:30, q:'Q2', dow:2},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2022-02-03', t:'2022-03-03', days:29, q:'Q3', dow:4},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2022-03-04', t:'2022-04-01', days:29, q:'Q3', dow:5},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2022-04-02', t:'2022-05-01', days:30, q:'Q3', dow:6},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2022-05-02', t:'2022-05-31', days:30, q:'Q3', dow:1},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2022-06-01', t:'2022-06-29', days:29, q:'Q4', dow:3},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2022-06-30', t:'2022-07-28', days:29, q:'Q4', dow:4},
+  ],
+  1444: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2022-07-29', t:'2022-08-27', days:30, q:'Q1', dow:5},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2022-08-28', t:'2022-09-25', days:29, q:'Q1', dow:0},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2022-09-26', t:'2022-10-24', days:29, q:'Q1', dow:1},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2022-10-25', t:'2022-11-23', days:30, q:'Q2', dow:2},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2022-11-24', t:'2022-12-22', days:29, q:'Q2', dow:4},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2022-12-23', t:'2023-01-20', days:29, q:'Q2', dow:5},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2023-01-21', t:'2023-02-19', days:30, q:'Q3', dow:6},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2023-02-20', t:'2023-03-21', days:30, q:'Q3', dow:1},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2023-03-22', t:'2023-04-20', days:30, q:'Q3', dow:3},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2023-04-21', t:'2023-05-20', days:30, q:'Q3', dow:5},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2023-05-21', t:'2023-06-18', days:29, q:'Q4', dow:0},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2023-06-19', t:'2023-07-18', days:30, q:'Q4', dow:1},
+  ],
+  1445: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2023-07-19', t:'2023-08-17', days:30, q:'Q1', dow:3},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2023-08-18', t:'2023-09-15', days:29, q:'Q1', dow:5},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2023-09-16', t:'2023-10-14', days:29, q:'Q1', dow:6},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2023-10-15', t:'2023-11-12', days:29, q:'Q2', dow:0},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2023-11-13', t:'2023-12-12', days:30, q:'Q2', dow:1},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2023-12-13', t:'2024-01-10', days:29, q:'Q2', dow:3},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2024-01-11', t:'2024-02-08', days:29, q:'Q3', dow:4},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2024-02-09', t:'2024-03-09', days:29, q:'Q3', dow:5},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2024-03-10', t:'2024-04-08', days:30, q:'Q3', dow:6},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2024-04-09', t:'2024-05-07', days:29, q:'Q3', dow:2},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2024-05-08', t:'2024-06-06', days:30, q:'Q4', dow:3},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2024-06-07', t:'2024-07-06', days:30, q:'Q4', dow:5},
+  ],
+  1446: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2024-07-07', t:'2024-08-04', days:29, q:'Q1', dow:0},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2024-08-05', t:'2024-09-03', days:30, q:'Q1', dow:1},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2024-09-04', t:'2024-10-03', days:30, q:'Q1', dow:3},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2024-10-04', t:'2024-11-02', days:30, q:'Q2', dow:5},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2024-11-03', t:'2024-12-01', days:29, q:'Q2', dow:0},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2024-12-02', t:'2024-12-31', days:30, q:'Q2', dow:1},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2025-01-01', t:'2025-01-30', days:30, q:'Q3', dow:3},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2025-01-31', t:'2025-02-28', days:29, q:'Q3', dow:5},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2025-03-01', t:'2025-03-29', days:29, q:'Q3', dow:6},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2025-03-30', t:'2025-04-28', days:30, q:'Q3', dow:0},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2025-04-29', t:'2025-05-27', days:29, q:'Q4', dow:2},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2025-05-28', t:'2025-06-25', days:29, q:'Q4', dow:4},
+  ],
+  1447: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2025-06-26', t:'2025-07-25', days:30, q:'Q1', dow:4},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2025-07-26', t:'2025-08-23', days:29, q:'Q1', dow:6},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2025-08-24', t:'2025-09-21', days:29, q:'Q1', dow:0},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2025-09-22', t:'2025-10-21', days:30, q:'Q2', dow:1},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2025-10-22', t:'2025-11-19', days:29, q:'Q2', dow:3},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2025-11-20', t:'2025-12-19', days:30, q:'Q2', dow:4},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2025-12-20', t:'2026-01-17', days:29, q:'Q3', dow:6},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2026-01-18', t:'2026-02-16', days:30, q:'Q3', dow:0},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2026-02-17', t:'2026-03-17', days:29, q:'Q3', dow:2},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2026-03-18', t:'2026-04-16', days:30, q:'Q3', dow:3},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2026-04-17', t:'2026-05-15', days:29, q:'Q4', dow:5},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2026-05-16', t:'2026-06-14', days:30, q:'Q4', dow:6},
+  ],
+  1448: [
+    {n:1, en:'Muharram',       ar:'محرم',          f:'2026-06-15', t:'2026-07-14', days:30, q:'Q1', dow:1},
+    {n:2, en:'Safar',          ar:'صفر',            f:'2026-07-15', t:'2026-08-12', days:29, q:'Q1', dow:3},
+    {n:3, en:"Rabi' Al-Awwal", ar:'ربيع الأول',     f:'2026-08-13', t:'2026-09-11', days:30, q:'Q1', dow:4},
+    {n:4, en:"Rabi' Al-Thani", ar:'ربيع الثاني',    f:'2026-09-12', t:'2026-10-10', days:29, q:'Q2', dow:6},
+    {n:5, en:'Jumada Al-Awwal',ar:'جمادى الأولى',   f:'2026-10-11', t:'2026-11-09', days:30, q:'Q2', dow:0},
+    {n:6, en:'Jumada Al-Thani',ar:'جمادى الثانية',  f:'2026-11-10', t:'2026-12-08', days:29, q:'Q2', dow:2},
+    {n:7, en:'Rajab',          ar:'رجب',            f:'2026-12-09', t:'2027-01-07', days:30, q:'Q3', dow:3},
+    {n:8, en:"Sha'ban",        ar:'شعبان',          f:'2027-01-08', t:'2027-02-05', days:29, q:'Q3', dow:5},
+    {n:9, en:'Ramadan',        ar:'رمضان',          f:'2027-02-06', t:'2027-03-07', days:30, q:'Q3', dow:6},
+    {n:10,en:'Shawwal',        ar:'شوال',           f:'2027-03-08', t:'2027-04-05', days:29, q:'Q3', dow:1},
+    {n:11,en:"Dhul Qi'dah",    ar:'ذو القعدة',      f:'2027-04-06', t:'2027-05-05', days:30, q:'Q4', dow:2},
+    {n:12,en:'Dhul Hijjah',    ar:'ذو الحجة',       f:'2027-05-06', t:'2027-06-03', days:29, q:'Q4', dow:4},
+  ],
+};
+
+let ACTIVE_YEAR = 1446;
+let HC = HIJRI_YEARS[ACTIVE_YEAR];
+
+
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+let TYPE='s',DM='g';
+let txns=[];
+function fmt(n){return Number(n||0).toLocaleString('en-SA',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function _baseSave(){localStorage.setItem(storageKey(),JSON.stringify(txns))}
+function fd(d){if(!d)return'';const[y,mo,dd]=d.split('-');return`${parseInt(dd)} ${MN[parseInt(mo)-1].slice(0,3)} ${y}`}
+
+// GREGORIAN CALENDAR
+let gCY=2026,gCM=4,gF=new Date(2026,4,5),gT=new Date(2026,4,5),gPick='f';
+function openGCal(w){
+  gPick=w;
+  const ref=w==='f'?gF:gT;
+  if(ref){const d=new Date(ref);gCY=d.getFullYear();gCM=d.getMonth();}else{gCY=2025;gCM=0;}
+  renderGC();
+  document.getElementById('gcal').style.display='block';
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById('gfbtn').classList.toggle('open',w==='f');
+  document.getElementById('gtbtn').classList.toggle('open',w==='t');
+}
+function gNav(d){gCM+=d;if(gCM>11){gCM=0;gCY++;}if(gCM<0){gCM=11;gCY--;}renderGC();}
+function renderGC(){
+  document.getElementById('gctitle').textContent=MN[gCM]+' '+gCY;
+  const fd0=new Date(gCY,gCM,1).getDay();
+  const dim=new Date(gCY,gCM+1,0).getDate();
+  const pd=new Date(gCY,gCM,0).getDate();
+  const today=new Date().toISOString().slice(0,10);
+  let h='';
+  for(let i=0;i<fd0;i++)h+=`<div class="gday other">${pd-fd0+i+1}</div>`;
+  for(let d=1;d<=dim;d++){
+    const ds=`${gCY}-${String(gCM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    let c='gday';
+    if(ds===today)c+=' today';
+    if(gF&&gT&&ds>gF&&ds<gT)c+=' gin';
+    if(ds===gF)c+=gT?' grng-s':' gsel';
+    else if(ds===gT)c+=gF?' grng-e':' gsel';
+    h+=`<div class="${c}" onclick="gPD('${ds}')">${d}</div>`;
+  }
+  const rem=(7-((fd0+dim)%7))%7;
+  for(let i=1;i<=rem;i++)h+=`<div class="gday other">${i}</div>`;
+  document.getElementById('gcgrid').innerHTML=h;
+}
+function gPD(d){
+  if(gPick==='f'){gF=d;if(gT&&gT<d)gT=null;}else{gT=d;if(gF&&gF>d)gF=null;}
+  updG();renderGC();
+  if(gPick==='f'&&!gT){gPick='t';document.getElementById('gfbtn').classList.remove('open');document.getElementById('gtbtn').classList.add('open');}
+}
+function gClear(){gF=null;gT=null;updG();renderGC();}
+function gToday(){const t=new Date().toISOString().slice(0,10);gPick==='f'?gF=t:gT=t;updG();renderGC();}
+function updG(){
+  const fv=document.getElementById('gfval'),tv=document.getElementById('gtval');
+  fv.textContent=gF?fd(gF):'Select date';fv.className=gF?'cf-val set':'cf-val';
+  tv.textContent=gT?fd(gT):'Select date';tv.className=gT?'cf-val set':'cf-val';
+  const hint=document.getElementById('ghint');
+  if(gF){
+    const h=hijriFor(gF),h2=gT?hijriFor(gT):null;
+    hint.style.display='inline-flex';
+    if(h){hint.textContent=h.n===(h2?.n||h.n)?`${h.en} (${h.ar}) ${ACTIVE_YEAR} — ${h.q}`:`${h.en} → ${h2?.en||'?'} ${ACTIVE_YEAR} — ${h.q}`;hint.className='dhint dhok';}
+    else{hint.textContent=`⚠ Outside Hijri ${ACTIVE_YEAR} range`;hint.className='dhint dhwarn';}
+  }else hint.style.display='none';
+}
+
+// HIJRI CALENDAR
+let hCM=7,hF=null,hT=null,hPick='f';
+function openHCal(w){
+  hPick=w;const ref=w==='f'?hF:hT;if(ref)hCM=ref.m;
+  renderHC();
+  document.getElementById('hcal').style.display='block';
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById('hfbtn').classList.toggle('open',w==='f');
+  document.getElementById('htbtn').classList.toggle('open',w==='t');
+}
+function hNav(d){hCM+=d;if(hCM>12)hCM=1;if(hCM<1)hCM=12;renderHC();}
+function renderHC(){
+  const m=HC[hCM-1];
+  document.getElementById('hcen').textContent=m.en+' '+ACTIVE_YEAR+' هـ';
+  document.getElementById('hcar').textContent=m.ar;
+  document.getElementById('hcgreg').textContent=fd(m.f)+' — '+fd(m.t);
+  document.getElementById('hcq').textContent='VAT Quarter: '+m.q;
+  let h='';
+  for(let i=0;i<m.dow;i++)h+='<div class="hday hother"></div>';
+  const sd=new Date(m.f);
+  for(let day=1;day<=m.days;day++){
+    const gd=new Date(sd);gd.setDate(sd.getDate()+day-1);
+    const gs=gd.toISOString().slice(0,10);
+    const gl=`${gd.getDate()}/${gd.getMonth()+1}`;
+    let c='hday';
+    const isF=hF&&hF.m===hCM&&hF.d===day;
+    const isT=hT&&hT.m===hCM&&hT.d===day;
+    const inR=hF&&hT&&(hCM>hF.m||(hCM===hF.m&&day>hF.d))&&(hCM<hT.m||(hCM===hT.m&&day<hT.d));
+    if(isF)c+=hT?' hrng-s':' hsel';
+    if(isT)c+=hF?' hrng-e':' hsel';
+    if(inR)c+=' hin';
+    h+=`<div class="${c}" onclick="hPD(${day},'${gs}')"><div class="hn">${day}</div><div class="hg">${gl}</div></div>`;
+  }
+  document.getElementById('hcgrid').innerHTML=h;
+}
+function hPD(day,gs){
+  const m=HC[hCM-1];
+  const pick={m:hCM,d:day,greg:gs,en:m.en,ar:m.ar,q:m.q};
+  if(hPick==='f'){hF=pick;if(hT&&(hT.m<hF.m||(hT.m===hF.m&&hT.d<hF.d)))hT=null;}
+  else{hT=pick;if(hF&&(hF.m>hT.m||(hF.m===hT.m&&hF.d>hT.d)))hF=null;}
+  updH();renderHC();
+  if(hPick==='f'&&!hT){hPick='t';document.getElementById('hfbtn').classList.remove('open');document.getElementById('htbtn').classList.add('open');}
+}
+function hClear(){hF=null;hT=null;updH();renderHC();}
+function updH(){
+  const fv=document.getElementById('hfval'),tv=document.getElementById('htval');
+  fv.textContent=hF?`${hF.d} ${hF.en} ${ACTIVE_YEAR} (${fd(hF.greg)})`:'Select Hijri date';fv.className=hF?'cf-val set':'cf-val';
+  tv.textContent=hT?`${hT.d} ${hT.en} ${ACTIVE_YEAR} (${fd(hT.greg)})`:'Select Hijri date';tv.className=hT?'cf-val set':'cf-val';
+  const hint=document.getElementById('hhint');
+  if(hF){const end=hT||hF;hint.style.display='inline-flex';hint.textContent=`Gregorian: ${fd(hF.greg)} → ${fd(end.greg)} — ${hF.q}`;hint.className='dhint dhok';}
+  else hint.style.display='none';
+}
+function closeAllCals(){
+  ['gcal','hcal'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('overlay').classList.remove('on');
+  ['gfbtn','gtbtn','hfbtn','htbtn'].forEach(id=>document.getElementById(id).classList.remove('open'));
+}
+
+// FORM
+function sv(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.nt').forEach(b=>b.classList.remove('on'));
+  document.getElementById('v'+id).classList.add('on');btn.classList.add('on');
+  if(id==='d')rdash();if(id==='l')rtable();if(id==='r')rreports();
+}
+function setT(t){
+  TYPE=t;
+  ['s','p','e'].forEach(x=>document.getElementById('tb'+x).className='ttab t'+x+(t===x?' on':''));
+  document.getElementById('sbtn').className='sbtn sb'+t;
+}
+function setDM(m){
+  DM=m;
+  document.getElementById('dmg').classList.toggle('on',m==='g');
+  document.getElementById('dmh').classList.toggle('on',m==='h');
+  document.getElementById('gpanel').style.display=m==='g'?'':'none';
+  document.getElementById('hpanel').style.display=m==='h'?'':'none';
+}
+function onCat(){
+  const v=document.getElementById('cat').value;if(!v)return;
+  const[,tp,vt]=v.split('|');
+  setT(tp);document.getElementById('vck').checked=vt==='y';calc();
+}
+function calc(){
+  const a=parseFloat(document.getElementById('amount').value)||0;
+  const on=document.getElementById('vck').checked;
+  const vat=on?a*0.15:0;
+  document.getElementById('c1').textContent='SAR '+fmt(a);
+  document.getElementById('c2').textContent='SAR '+fmt(vat);
+  document.getElementById('c3').textContent='SAR '+fmt(a+vat);
+  document.getElementById('c4').textContent='SAR '+fmt(a);
+  document.getElementById('c5').textContent='SAR '+fmt(vat);
+  const bdg=document.getElementById('vbdg'),crd=document.getElementById('vcrd'),sub=document.getElementById('vsub');
+  if(on){bdg.textContent='YES +15%';bdg.className='vbdg vby';crd.classList.add('on');sub.textContent='Keep original tax invoice (فاتورة ضريبية) — required for VAT claim';}
+  else{bdg.textContent='NO VAT';bdg.className='vbdg vbn';crd.classList.remove('on');sub.textContent='Government fee or exempt — no input VAT — لا استرداد ضريبة';}
+}
+function getDI(){
+  if(DM==='g'){
+    if(!gF)return null;
+    const t=gT||gF,h=hijriFor(gF);
+    return{display:gF===gT||!gT?fd(gF):`${fd(gF)} → ${fd(gT)}`,hijri:h?h.en:'—',hijriAr:h?h.ar:'—',q:h?h.q:'—',gF,gT:t};
+  }else{
+    if(!hF)return null;
+    const t=hT||hF;
+    return{display:hF.m===t.m&&hF.d===t.d?`${hF.d} ${hF.en} ${ACTIVE_YEAR}`:`${hF.d} ${hF.en} → ${t.d} ${t.en} ${ACTIVE_YEAR}`,hijri:hF.en,hijriAr:hF.ar,q:hF.q,gF:hF.greg,gT:t.greg};
+  }
+}
+function submit(){
+  const a=parseFloat(document.getElementById('amount').value)||0;
+  if(!a){toast('⚠ Enter amount — أدخل المبلغ');return;}
+  const di=getDI();
+  if(!di){toast('⚠ Select a date — اختر التاريخ');return;}
+  const cat=document.getElementById('cat');
+  const cv=cat.value,ct=cat.options[cat.selectedIndex]?.text||'';
+  const on=document.getElementById('vck').checked;
+  const tx={id:Date.now(),attachments:[...pendingAtts],type:TYPE,date:di.display,gF:di.gF,gT:di.gT,hijri:di.hijri,hijriAr:di.hijriAr,q:di.q,cat:cv.split('|')[0],catL:ct.split('—')[0].trim(),branch:document.getElementById('branch').value,desc:document.getElementById('desc').value||ct.split('—')[0].trim(),sup:document.getElementById('supplier').value,inv:document.getElementById('invoice').value,notes:document.getElementById('notes').value,amount:a,vat:on?a*0.15:0,total:a+(on?a*0.15:0),vatOn:on};
+  txns.push(tx);save();uall();
+  const attCount = pendingAtts.length;
+  clearPendingAtts();
+  toast('✦ Added: '+tx.desc.substring(0,30)+(attCount?' + '+attCount+' file'+(attCount>1?'s':''):''));
+  ['amount','desc','supplier','invoice','notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cat').value='';calc();
+}
+function uall(){
+  let rev=0,exp=0,outV=0,inV=0;
+  txns.forEach(t=>{if(t.type==='s'){rev+=t.amount;outV+=t.vat;}else{exp+=t.amount;inV+=t.vat;}});
+  const p=rev-exp,z=Math.max(p,0)*0.025,nv=outV-inV;
+  ['k1','dk1'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=fmt(rev);});
+  ['k2','dk2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=fmt(exp);});
+  ['k3','dk3'].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent=fmt(Math.abs(p));e.className=e.className.replace(/kv[a-z]/g,p>=0?'kvg':'kvr');}});
+  ['k4','dk4'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=fmt(z);});
+  document.getElementById('vs1').textContent=fmt(outV);
+  document.getElementById('vs2').textContent=fmt(inV);
+  document.getElementById('vs3').textContent=(nv<0?'Credit ':'')+fmt(Math.abs(nv));
+  document.getElementById('vs4').textContent=fmt(z);
+  document.getElementById('nc').textContent=txns.length+' entr'+(txns.length===1?'y':'ies');
+  rled();
+}
+function rled(){
+  const el=document.getElementById('lb');
+  if(!txns.length){el.innerHTML='<div class="lempty">No entries yet<br><span style="font-family:var(--sans)">لا توجد إدخالات</span></div>';return;}
+  el.innerHTML=[...txns].slice(-6).reverse().map(t=>`<div class="li"><div class="ldot ld${t.type==='s'?'g':t.type==='p'?'a':'r'}"></div><div><div class="ldesc">${t.desc}${t.vatOn?'<span style="font-size:8px;color:var(--amber);font-family:var(--mono);margin-left:3px">VAT</span>':''}</div><div class="lmeta">${t.date} · ${t.hijri}${t.attachments&&t.attachments.length?' · 📎'+t.attachments.length:''}</div></div><div class="lamt" style="color:${t.type==='s'?'var(--green)':'var(--red)'}">${t.type==='s'?'+':'-'}${fmt(t.amount)}</div></div>`).join('');
+}
+function rdash(){
+  let rev=0,exp=0,outV=0,inV=0,cogs=0,pay=0,rent=0,gov=0,oth=0;
+  const rb={B1:0,B2:0,Ot:0},qd={Q1:{r:0,ov:0,iv:0},Q2:{r:0,ov:0,iv:0},Q3:{r:0,ov:0,iv:0},Q4:{r:0,ov:0,iv:0}};
+  txns.forEach(t=>{
+    const q=t.q||'Q1';
+    if(t.type==='s'){rev+=t.amount;outV+=t.vat;if(qd[q]){qd[q].r+=t.amount;qd[q].ov+=t.vat;}
+      if(t.cat.includes('Branch1'))rb.B1+=t.amount;else if(t.cat.includes('Branch2'))rb.B2+=t.amount;else rb.Ot+=t.amount;
+    }else{exp+=t.amount;inV+=t.vat;if(qd[q])qd[q].iv+=t.vat;
+      const c=t.cat;
+      if(c.includes('Purchases')||c.includes('Pack')||c.includes('Trans'))cogs+=t.amount;
+      else if(c.includes('Salary')||c.includes('GOSI')||c.includes('End'))pay+=t.amount;
+      else if(c.includes('Rent')||c.includes('Elec')||c.includes('Water'))rent+=t.amount;
+      else if(['Qiwa','Jawaz','Munic','License','Civil','Work','Expat','Nita','Labour','SFDA','Health','Medical','Chamber','Deliver'].some(k=>c.includes(k)))gov+=t.amount;
+      else oth+=t.amount;
+    }
+  });
+  const pr=rev-exp,nv=outV-inV;
+  document.getElementById('dvat').innerHTML=`<div class="dr"><span class="dl">Output VAT</span><span class="dv kvt">${fmt(outV)}</span></div><div class="dr"><span class="dl">Input VAT claimable</span><span class="dv kvg">(${fmt(inV)})</span></div><div class="dr tot"><span class="dl">Net VAT payable</span><span class="dv kva">${fmt(Math.max(nv,0))}</span></div>`;
+  document.getElementById('dexp').innerHTML=[['COGS',cogs],['Payroll',pay],['Rent & Utilities',rent],['Gov. Fees',gov],['Other',oth]].map(([l,v])=>`<div class="dr"><span class="dl">${l}</span><span class="dv kvr">${fmt(v)}</span></div>`).join('')+`<div class="dr tot"><span class="dl">Total</span><span class="dv kvr">${fmt(exp)}</span></div>`;
+  document.getElementById('drev').innerHTML=`<div class="dr"><span class="dl">Branch 1</span><span class="dv kvt">${fmt(rb.B1)}</span></div><div class="dr"><span class="dl">Branch 2</span><span class="dv kvt">${fmt(rb.B2)}</span></div><div class="dr"><span class="dl">Other</span><span class="dv kvt">${fmt(rb.Ot)}</span></div><div class="dr tot"><span class="dl">Total</span><span class="dv kvt">${fmt(rev)}</span></div><div class="dr tot"><span class="dl">Net profit</span><span class="dv ${pr>=0?'kvg':'kvr'}">${fmt(pr)}</span></div>`;
+  const deads=getVATDeadlines();
+  document.getElementById('dq').innerHTML=['Q1','Q2','Q3','Q4'].map(q=>{const d=qd[q],n=d.ov-d.iv;return`<div class="dr"><span class="dl">${q} Revenue</span><span class="dv kvt">${fmt(d.r)}</span></div><div class="dr"><span class="dl">${q} VAT net</span><span class="dv kva">${fmt(Math.max(n,0))}</span></div><div class="dr"><span class="dl" style="font-size:10px;color:var(--text3)">Due: ${deads[q]}</span></div>`;}).join('<div style="height:4px"></div>');
+}
+function rtable(){
+  var tb=document.getElementById('tb');
+  if(!txns.length){tb.innerHTML='<tr><td colspan="13" class="nd">No transactions</td></tr>';return;}
+  var rows=[];
+  var list=[...txns].reverse();
+  for(var i=0;i<list.length;i++){
+    var t=list[i];
+    var clr=t.type==='s'?'var(--green)':'var(--red)';
+    var sgn=t.type==='s'?'+':'-';
+    var ttype=t.type==='s'?'SALES':t.type==='p'?'PURCHASE':'EXPENSE';
+    var tcls='tg'+(t.type==='s'?'s':t.type==='p'?'p':'e');
+    var vtag=t.vatOn?'<span class="tag tgv">+15%</span>':'<span class="tag tgn">NO VAT</span>';
+    var abadge=attCountBadge(t,'file');
+    var row='<tr>';
+    row+='<td style="font-family:var(--mono);font-size:11px;color:var(--text2)">'+t.date+'</td>';
+    row+='<td><span class="tag '+tcls+'">'+ttype+'</span></td>';
+    row+='<td style="font-size:11px;color:var(--text2)">'+(t.catL||t.cat)+'</td>';
+    row+='<td>'+(t.desc||'')+'</td>';
+    row+='<td style="color:var(--text3)">'+(t.sup||'—')+'</td>';
+    row+='<td style="font-size:11px;color:var(--text3)">'+(t.branch||'')+'</td>';
+    row+='<td style="font-family:var(--mono);font-size:10px;color:var(--text3)">'+(t.hijri||'')+'</td>';
+    row+='<td style="font-family:var(--mono);font-size:10px;color:var(--teal)">'+(t.q||'')+'</td>';
+    row+='<td>'+vtag+'</td>';
+    row+='<td style="text-align:right;font-family:var(--mono);color:'+clr+'">'+sgn+fmt(t.amount)+'</td>';
+    row+='<td style="text-align:right;font-family:var(--mono);color:var(--amber)">'+fmt(t.vat)+'</td>';
+    row+='<td style="text-align:right;font-family:var(--mono);font-weight:500;color:'+clr+'">'+sgn+fmt(t.total)+'</td>';
+    row+='<td>'+abadge+'</td>';
+    row+='<td><button class="dbtn" onclick="del('+t.id+')">✕</button></td>';
+    row+='</tr>';
+    if(t.attachments&&t.attachments.length){
+      row+='<tr><td colspan="13" style="padding:0 13px"><div class="tx-detail" id="txd-'+t.id+'"></div></td></tr>';
+    }
+    rows.push(row);
+  }
+  tb.innerHTML=rows.join('');
+}
+function rreports(){
+  updateReportYearLabels();
+  var rev=0,exp=0,outV=0,inV=0,cogs=0,pay=0,rent=0,gov=0,oth=0;
+  var qd={Q1:{ov:0,iv:0},Q2:{ov:0,iv:0},Q3:{ov:0,iv:0},Q4:{ov:0,iv:0}};
+  txns.forEach(function(t){
+    var q=t.q||'Q1';
+    if(t.type==='s'){rev+=t.amount;outV+=t.vat;if(qd[q])qd[q].ov+=t.vat;}
+    else{
+      exp+=t.amount;inV+=t.vat;if(qd[q])qd[q].iv+=t.vat;
+      var c=t.cat;
+      if(c.includes('Purchases')||c.includes('Pack')||c.includes('Trans'))cogs+=t.amount;
+      else if(c.includes('Salary')||c.includes('GOSI')||c.includes('End'))pay+=t.amount;
+      else if(c.includes('Rent')||c.includes('Elec')||c.includes('Water'))rent+=t.amount;
+      else if(['Qiwa','Jawaz','Munic','License','Civil','Work','Expat','Nita','Labour','SFDA','Health','Medical','Chamber'].some(function(k){return c.includes(k);}))gov+=t.amount;
+      else oth+=t.amount;
+    }
+  });
+  var p=rev-exp,z=Math.max(p,0)*0.025;
+  var riRows=[
+    ['Total Revenue','إجمالي الإيرادات',rev,'kvt'],
+    ['COGS','تكلفة البضاعة',cogs,'kvr'],
+    ['Payroll','الرواتب',pay,'kvr'],
+    ['Rent & Utilities','الإيجار والمرافق',rent,'kvr'],
+    ['Gov. Fees','الرسوم الحكومية',gov,'kvr'],
+    ['Other Expenses','مصروفات أخرى',oth,'kvr'],
+    ['Net Profit','صافي الربح',p,p>=0?'kvg':'kvr']
+  ];
+  var riHtml='';
+  for(var i=0;i<riRows.length;i++){var r=riRows[i];riHtml+='<div class="rcell"><div class="rclbl">'+r[0]+'</div><div class="rcval '+r[3]+'">'+fmt(r[2])+'</div><div class="rcsub">'+r[1]+'</div></div>';}
+  document.getElementById('ri').innerHTML=riHtml;
+  var deads=getVATDeadlines();
+  var rvatHtml='';
+  ['Q1','Q2','Q3','Q4'].forEach(function(q){
+    var d=qd[q],n=d.ov-d.iv;
+    rvatHtml+='<div class="rcell"><div class="rclbl" style="color:var(--teal);font-weight:600">'+q+'</div>';
+    rvatHtml+='<div style="font-size:11px;margin-top:5px;color:var(--text2)">Out: <span style="color:var(--teal);font-family:var(--mono)">'+fmt(d.ov)+'</span></div>';
+    rvatHtml+='<div style="font-size:11px;color:var(--text2)">In: <span style="color:var(--green);font-family:var(--mono)">('+fmt(d.iv)+')</span></div>';
+    rvatHtml+='<div style="font-size:12px;margin-top:5px">Net: <span class="'+(n>=0?'kva':'kvg')+'" style="font-family:var(--mono)">'+fmt(Math.abs(n))+'</span></div>';
+    rvatHtml+='<div class="rcsub" style="margin-top:4px">Due: '+deads[q]+'</div></div>';
+  });
+  document.getElementById('rvat').innerHTML=rvatHtml;
+  var rzRows=[
+    ['Zakat base (est.)','الوعاء الزكوي',Math.max(p,0),'kva'],
+    ['Zakat rate','معدل الزكاة','2.5%','kva'],
+    ['Zakat due (est.)','الزكاة المستحقة',z,'kva'],
+    ['Filing deadline','موعد التقديم',getZakatDeadline(),'kvt'],
+    ['Filing window','نافذة التقديم','120 days','kvt'],
+    ['Saudi share','نسبة سعودية','100%','kvt']
+  ];
+  var rzHtml='';
+  for(var j=0;j<rzRows.length;j++){var rr=rzRows[j];var vv=typeof rr[2]==='number'?fmt(rr[2]):rr[2];rzHtml+='<div class="rcell"><div class="rclbl">'+rr[0]+'</div><div class="rcval '+rr[3]+'">'+vv+'</div><div class="rcsub">'+rr[1]+'</div></div>';}
+  document.getElementById('rz').innerHTML=rzHtml;
+}
+function del(id){txns=txns.filter(t=>t.id!==id);save();uall();rtable();toast('Deleted — تم الحذف');}
+function clearAll(){if(!txns.length)return;if(!confirm('Clear all entries? — حذف جميع الإدخالات؟'))return;txns=[];save();uall();toast('Cleared — تم المسح');}
+function exportCSV(){
+  if(!txns.length){toast('No data to export');return;}
+  const h='Date,Type,Category,Description,Supplier,Branch,Hijri,Q,VAT?,Amount,VAT 15%,Total,Invoice,Notes';
+  const rows=txns.map(t=>[t.date,t.type==='s'?'Sales':t.type==='p'?'Purchase':'Expense',t.catL,'"'+(t.desc)+'"','"'+(t.sup||'')+'"',t.branch,t.hijri,t.q,t.vatOn?'YES':'NO',t.amount.toFixed(2),t.vat.toFixed(2),t.total.toFixed(2),t.inv||'','"'+(t.notes||'')+'"'].join(','));
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent([h,...rows].join('\n'));a.download='Kafeel_'+ACTIVE_YEAR+'.csv';a.click();
+  toast('Exported — تم التصدير');
+}
+function toast(msg){const el=document.getElementById('toast');document.getElementById('tmsg').textContent=msg;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2800);}
+try{calc();uall(); if(typeof updateReportYearLabels==='function') updateReportYearLabels();}catch(e){console.error("Init error:",e);}
+
+// ═══════════════════════════════════════════════════════
+// GOOGLE DRIVE INTEGRATION
+// Uses Google Identity Services + Drive REST API
+// ═══════════════════════════════════════════════════════
+
+// IMPORTANT: Replace with your own Google OAuth Client ID
+// Get one free at: console.cloud.google.com
+// Steps: New Project → Enable Drive API → Create OAuth credentials → Web application
+// Add http://localhost and the file:// origin or your hosting URL
+const GD_CLIENT_ID = '761842423454-huc7oo9vtqimqmpan6aa5tickv5qj1m3.apps.googleusercontent.com';
+const GD_SCOPES = 'https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file';
+const GD_FILE_NAME = 'Kafeel_Books_' + ACTIVE_YEAR + '.json';
+const GD_BACKUP_PREFIX = 'Kafeel_Backup_';
+const GD_FOLDER_NAME = 'Kafeel Books';
+
+let gdToken = null;
+let gdFileId = null;
+let gdAutoSaveTimer = null;
+let gdUser = null;
+let gdRestoreFileId = null;
+
+// ── INIT ──────────────────────────────────────────────
+function gdInit() {
+  // Load Google Identity Services
+  const script = document.createElement('script');
+  script.src = 'https://accounts.google.com/gsi/client';
+  script.onerror = () => {
+    setGDStatus('grey', 'Google Drive unavailable (open via web server for Drive sync)');
+    document.getElementById('gd-connect-btn').title = 'Host this file on a web server to enable Drive sync';
+  };
+  script.onload = () => {
+    // Check if we have a saved token
+    const saved = localStorage.getItem('kafeel_gd_token');
+    if (saved) {
+      try {
+        const t = JSON.parse(saved);
+        if (t.expiry && Date.now() < t.expiry) {
+          gdToken = t;
+          gdConnected();
+        } else {
+          // Token expired — silently refresh
+          gdSilentRefresh();
+        }
+      } catch(e) { localStorage.removeItem('kafeel_gd_token'); }
+    }
+  };
+  document.head.appendChild(script);
+
+  // Check if CLIENT_ID is configured
+  setGDStatus('grey', 'Click Connect to link your Google Drive');
+}
+
+// ── SIGN IN ─────────────────────────────────────────
+function gdSignIn() {
+
+  document.getElementById('modal-setup').style.display = 'none';
+  setGDStatus('amber', 'Signing in to Google...');
+
+  if(typeof google === 'undefined' || !google.accounts) {
+    setGDStatus('red', 'Google API not loaded — open the app via a web server (not file://)');
+    toast('⚠ Host this file on GitHub Pages or a web server for Drive sync');
+    return;
+  }
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GD_CLIENT_ID,
+    scope: GD_SCOPES,
+    callback: (response) => {
+      if (response.error) {
+        setGDStatus('red', 'Sign in failed: ' + response.error);
+        return;
+      }
+      gdToken = {
+        access_token: response.access_token,
+        expiry: Date.now() + (response.expires_in * 1000)
+      };
+      localStorage.setItem('kafeel_gd_token', JSON.stringify(gdToken));
+      gdConnected();
+    }
+  });
+  client.requestAccessToken();
+}
+
+function gdSilentRefresh() {
+  if (GD_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') return;
+  try {
+    if(typeof google === 'undefined' || !google.accounts) {
+    setGDStatus('red', 'Google API not loaded — open the app via a web server (not file://)');
+    toast('⚠ Host this file on GitHub Pages or a web server for Drive sync');
+    return;
+  }
+  const client = google.accounts.oauth2.initTokenClient({
+      client_id: GD_CLIENT_ID,
+      scope: GD_SCOPES,
+      prompt: '',
+      callback: (response) => {
+        if (!response.error) {
+          gdToken = { access_token: response.access_token, expiry: Date.now() + (response.expires_in * 1000) };
+          localStorage.setItem('kafeel_gd_token', JSON.stringify(gdToken));
+          gdConnected();
+        }
+      }
+    });
+    client.requestAccessToken();
+  } catch(e) {}
+}
+
+// ── CONNECTED ─────────────────────────────────────────
+async function gdConnected() {
+  setGDStatus('amber', 'Connecting to Google Drive...');
+  try {
+    // Get user info
+    const uRes = await gdFetch('https://www.googleapis.com/oauth2/v2/userinfo');
+    if (uRes.ok) {
+      gdUser = await uRes.json();
+      document.getElementById('gd-avatar').src = gdUser.picture || '';
+      document.getElementById('gd-username').textContent = gdUser.name || gdUser.email || '';
+      document.getElementById('gd-user-info').style.display = 'flex';
+    }
+
+    // Find or create the main data file
+    await gdFindOrCreateFile();
+
+    // Show drive buttons
+    document.getElementById('gd-connect-btn').style.display = 'none';
+    document.getElementById('gd-save-btn').style.display = '';
+    document.getElementById('gd-backup-btn').style.display = '';
+    document.getElementById('gd-disconnect-btn').style.display = '';
+
+    // Load data from Drive (restores on any new device)
+    await gdLoadFromDrive();
+
+    setGDStatus('green', 'Synced with Google Drive — ' + (gdUser?.email || ''));
+    gdStartAutoSave();
+    toast('✦ Google Drive connected — Google درايف متصل');
+
+  } catch(e) {
+    setGDStatus('red', 'Drive connection failed: ' + e.message);
+  }
+}
+
+// ── FIND OR CREATE FILE ───────────────────────────────
+async function gdFindOrCreateFile() {
+  // Search for existing file in appDataFolder (hidden app storage)
+  const searchRes = await gdFetch(
+    `https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=name='${GD_FILE_NAME}'&fields=files(id,name,modifiedTime)`
+  );
+  const searchData = await searchRes.json();
+
+  if (searchData.files && searchData.files.length > 0) {
+    gdFileId = searchData.files[0].id;
+  } else {
+    // Create new file
+    const createRes = await gdFetch(
+      'https://www.googleapis.com/drive/v3/files',
+      'POST',
+      { name: GD_FILE_NAME, parents: ['appDataFolder'], mimeType: 'application/json' }
+    );
+    const createData = await createRes.json();
+    gdFileId = createData.id;
+  }
+}
+
+// ── LOAD FROM DRIVE ────────────────────────────────────
+async function gdLoadFromDrive() {
+  if (!gdFileId) return;
+  try {
+    const res = await gdFetch(
+      `https://www.googleapis.com/drive/v3/files/${gdFileId}?alt=media`
+    );
+    if (res.ok) {
+      const text = await res.text();
+      if (text && text.trim().startsWith('{')) {
+        const data = JSON.parse(text);
+        if (data.txns && Array.isArray(data.txns) && data.txns.length > 0) {
+          // Merge: use Drive data if it has more entries
+          const localCount = txns.length;
+          const driveCount = data.txns.length;
+          if (driveCount > localCount) {
+            txns = data.txns;
+            save();
+            uall();
+            toast(`✦ Restored ${driveCount} entries from Drive`);
+          }
+        }
+      }
+    }
+  } catch(e) { /* File might be empty on first use */ }
+}
+
+// ── SAVE TO DRIVE ──────────────────────────────────────
+async function gdSaveToDrive() {
+  if (!gdToken || !gdFileId) return;
+  setGDStatus('amber', 'Saving to Google Drive...');
+  try {
+    const data = JSON.stringify({
+      txns,
+      savedAt: new Date().toISOString(),
+      version: '1.0',
+      establishment: 'Kafeel — مؤسسة كفيل',
+      hijriYear: String(ACTIVE_YEAR)
+    }, null, 2);
+
+    const res = await gdFetch(
+      `https://www.googleapis.com/upload/drive/v3/files/${gdFileId}?uploadType=media`,
+      'PATCH',
+      data,
+      'application/json'
+    );
+
+    if (res.ok) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-SA', { hour: '2-digit', minute: '2-digit' });
+      setGDStatus('green', `Saved to Drive at ${timeStr} — ${gdUser?.email || ''}`);
+    } else {
+      setGDStatus('red', 'Save failed — check connection');
+    }
+  } catch(e) {
+    setGDStatus('red', 'Save error: ' + e.message);
+  }
+}
+
+// ── MANUAL SAVE ────────────────────────────────────────
+async function gdSaveNow() {
+  if (!gdToken) { toast('⚠ Not connected to Drive'); return; }
+  await gdSaveToDrive();
+  toast('💾 Saved to Google Drive');
+}
+
+// ── AUTO SAVE (3 seconds after last change) ────────────
+function gdStartAutoSave() {
+  // Override the save() function to also trigger Drive sync
+  const origSave = save;
+  window.save = function() {
+    origSave();
+    clearTimeout(gdAutoSaveTimer);
+    gdAutoSaveTimer = setTimeout(() => gdSaveToDrive(), 3000);
+  };
+}
+
+// ── MANUAL BACKUP SNAPSHOT ─────────────────────────────
+async function gdManualBackup() {
+  if (!gdToken) return;
+  const now = new Date();
+  const stamp = now.toISOString().slice(0,19).replace('T','_').replace(/:/g,'-');
+  const backupName = `${GD_BACKUP_PREFIX}${stamp}.json`;
+
+  setGDStatus('amber', 'Creating backup snapshot...');
+
+  try {
+    const data = JSON.stringify({ txns, savedAt: now.toISOString(), entries: txns.length });
+
+    // Create backup file
+    const metaRes = await gdFetch(
+      'https://www.googleapis.com/drive/v3/files',
+      'POST',
+      { name: backupName, parents: ['appDataFolder'], mimeType: 'application/json' }
+    );
+    const meta = await metaRes.json();
+
+    await gdFetch(
+      `https://www.googleapis.com/upload/drive/v3/files/${meta.id}?uploadType=media`,
+      'PATCH', data, 'application/json'
+    );
+
+    setGDStatus('green', 'Backup created — ' + stamp);
+    toast('📸 Backup saved: ' + backupName);
+    loadBackupList();
+  } catch(e) {
+    setGDStatus('red', 'Backup failed');
+  }
+}
+
+// ── LOAD BACKUP LIST ───────────────────────────────────
+async function loadBackupList() {
+  const el = document.getElementById('backup-list');
+  el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text3);font-size:12px">Loading...</div>';
+
+  try {
+    const res = await gdFetch(
+      `https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=name contains '${GD_BACKUP_PREFIX}'&fields=files(id,name,modifiedTime,size)&orderBy=modifiedTime desc&pageSize=20`
+    );
+    const data = await res.json();
+    const files = data.files || [];
+
+    if (!files.length) {
+      el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text3);font-size:12px">No backups yet — click "Save snapshot" to create one</div>';
+      return;
+    }
+
+    el.innerHTML = files.map(f => {
+      const date = new Date(f.modifiedTime).toLocaleString('en-SA');
+      const size = f.size ? Math.round(f.size/1024) + ' KB' : '';
+      return `<div class="backup-item">
+        <div><div class="backup-name">${f.name.replace(GD_BACKUP_PREFIX,'').replace('.json','')}</div>
+        <div class="backup-date">${date} ${size}</div></div>
+        <button class="backup-restore" onclick="promptRestore('${f.id}','${f.name}')">Restore</button>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--red);font-size:12px">Failed to load backups</div>';
+  }
+}
+
+// ── RESTORE ────────────────────────────────────────────
+function promptRestore(fileId, name) {
+  gdRestoreFileId = fileId;
+  document.getElementById('restore-msg').textContent =
+    `Restore backup "${name}"? Current data will be saved as a snapshot first.`;
+  document.getElementById('modal-restore').style.display = 'flex';
+}
+
+async function confirmRestore() {
+  document.getElementById('modal-restore').style.display = 'none';
+  if (!gdRestoreFileId) return;
+
+  // First save current as backup
+  await gdManualBackup();
+
+  setGDStatus('amber', 'Restoring backup...');
+  try {
+    const res = await gdFetch(
+      `https://www.googleapis.com/drive/v3/files/${gdRestoreFileId}?alt=media`
+    );
+    const data = await res.json();
+    if (data.txns) {
+      txns = data.txns;
+      save();
+      uall();
+      setGDStatus('green', 'Backup restored successfully');
+      toast(`✦ Restored ${txns.length} entries from backup`);
+    }
+  } catch(e) {
+    setGDStatus('red', 'Restore failed: ' + e.message);
+  }
+}
+
+// ── DISCONNECT ─────────────────────────────────────────
+function gdDisconnect() {
+  if (!confirm('Disconnect Google Drive? Your local data is safe.')) return;
+  gdToken = null;
+  gdFileId = null;
+  gdUser = null;
+  localStorage.removeItem('kafeel_gd_token');
+  document.getElementById('gd-connect-btn').style.display = '';
+  document.getElementById('gd-save-btn').style.display = 'none';
+  document.getElementById('gd-backup-btn').style.display = 'none';
+  document.getElementById('gd-disconnect-btn').style.display = 'none';
+  document.getElementById('gd-user-info').style.display = 'none';
+  setGDStatus('grey', 'Disconnected from Google Drive');
+  toast('Disconnected from Drive');
+}
+
+// ── STATUS ─────────────────────────────────────────────
+function setGDStatus(color, msg) {
+  document.getElementById('gddot').className = 'gd-dot ' + color;
+  document.getElementById('gdmsg').textContent = msg;
+}
+
+// ── MODALS ─────────────────────────────────────────────
+function showGDModal(type) {
+  if (type === 'setup' || type === 'setup-noid') {
+    document.getElementById('modal-setup').style.display = 'flex';
+  } else if (type === 'backups') {
+    document.getElementById('modal-backups').style.display = 'flex';
+    loadBackupList();
+  }
+}
+
+// ── FETCH HELPER ───────────────────────────────────────
+async function gdFetch(url, method = 'GET', body = null, contentType = 'application/json') {
+  if (!gdToken) throw new Error('Not authenticated');
+  const headers = { 'Authorization': 'Bearer ' + gdToken.access_token };
+  if (body && contentType) headers['Content-Type'] = contentType;
+
+  const opts = { method, headers };
+  if (body) opts.body = typeof body === 'string' ? body : JSON.stringify(body);
+
+  const res = await fetch(url, opts);
+
+  // Token expired
+  if (res.status === 401) {
+    localStorage.removeItem('kafeel_gd_token');
+    gdToken = null;
+    setGDStatus('red', 'Session expired — please reconnect');
+    document.getElementById('gd-connect-btn').style.display = '';
+    document.getElementById('gd-save-btn').style.display = 'none';
+    throw new Error('Token expired');
+  }
+  return res;
+}
+
+// ── EXPORT TO JSON (manual backup to download) ─────────
+function exportJSON() {
+  const data = JSON.stringify({ txns, savedAt: new Date().toISOString(), entries: txns.length }, null, 2);
+  const a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
+  a.download = 'Kafeel_Books_Backup_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  toast('📥 JSON backup downloaded');
+}
+
+// ── IMPORT FROM JSON ────────────────────────────────────
+function importJSON() {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = '.json';
+  inp.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (data.txns && Array.isArray(data.txns)) {
+          if (!confirm(`Import ${data.txns.length} entries? This will replace current data.`)) return;
+          txns = data.txns;
+          save();
+          uall();
+          toast(`✦ Imported ${txns.length} entries`);
+        } else {
+          toast('⚠ Invalid backup file');
+        }
+      } catch(e) { toast('⚠ Could not read file'); }
+    };
+    reader.readAsText(file);
+  };
+  inp.click();
+}
+
+// ── INIT ON LOAD ────────────────────────────────────────
+
+// Global error handler - prevents white screen on script errors
+window.addEventListener('error', function(e) {
+  // Ignore cross-origin script errors (e.g. Google API from file://)
+  if(!e.message || e.message === 'Script error.' || e.filename === '') return;
+  console.error('App error:', e.message, 'at', e.filename, e.lineno);
+});
+
+window.addEventListener('unhandledrejection', function(e) {
+  console.error('Unhandled promise rejection:', e.reason);
+  e.preventDefault();
+});
+
+gdInit();
+
+
+// ═══════════════════════════════════════════════════════
+// ATTACHMENT SYSTEM
+// ═══════════════════════════════════════════════════════
+let pendingAtts = [];  // attachments waiting to be saved with next transaction
+let viewerCurrent = null;
+
+// ── File type helpers ──
+function attTypeLabel(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  if(['jpg','jpeg','png','gif','webp','heic'].includes(ext)) return {label:'IMG', cls:'img', icon:'🖼'};
+  if(ext==='pdf') return {label:'PDF', cls:'pdf', icon:'📄'};
+  if(['xlsx','xls','csv'].includes(ext)) return {label:'XLS', cls:'xls', icon:'📊'};
+  if(['doc','docx'].includes(ext)) return {label:'DOC', cls:'doc', icon:'📝'};
+  if(ext==='json') return {label:'JSON', cls:'other', icon:'📋'};
+  return {label:ext.toUpperCase(), cls:'other', icon:'📁'};
+}
+
+function fmtSize(bytes) {
+  if(bytes < 1024) return bytes + ' B';
+  if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/(1024*1024)).toFixed(1) + ' MB';
+}
+
+function isImage(name) {
+  return /\.(jpg|jpeg|png|gif|webp|heic)$/i.test(name);
+}
+
+// ── Read file to base64 ──
+function readFileB64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ── Add files to pending list ──
+async function attFilesSelected(files) {
+  for(const file of files) {
+    if(file.size > 10 * 1024 * 1024) {
+      toast('⚠ File too large (max 10MB): ' + file.name);
+      continue;
+    }
+    const b64 = await readFileB64(file);
+    const att = {
+      id: Date.now() + Math.random(),
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      data: b64,
+      addedAt: new Date().toISOString()
+    };
+    pendingAtts.push(att);
+  }
+  renderPendingAtts();
+  // Reset input so same file can be re-added
+  document.getElementById('att-input').value = '';
+}
+
+// ── Drag and drop ──
+function attDragOver(e) {
+  e.preventDefault();
+  document.getElementById('att-zone').classList.add('drag');
+}
+function attDragLeave() {
+  document.getElementById('att-zone').classList.remove('drag');
+}
+function attDrop(e) {
+  e.preventDefault();
+  document.getElementById('att-zone').classList.remove('drag');
+  attFilesSelected(e.dataTransfer.files);
+}
+
+// ── Render pending attachments ──
+function renderPendingAtts() {
+  const el = document.getElementById('att-pending');
+  if(!pendingAtts.length) { el.innerHTML = ''; return; }
+  el.innerHTML = pendingAtts.map((att, i) => {
+    const t = attTypeLabel(att.name);
+    const thumb = isImage(att.name)
+      ? `<img class="att-thumb" src="${att.data}" alt="${att.name}">`
+      : `<div class="att-icon">${t.icon}</div>`;
+    return `<div class="att-item">
+      ${thumb}
+      <div class="att-info">
+        <div class="att-name">${att.name}</div>
+        <div class="att-size">${fmtSize(att.size)} <span class="att-type ${t.cls}">${t.label}</span></div>
+      </div>
+      <div class="att-actions">
+        <button class="att-btn" onclick="previewAtt(pendingAtts[${i}])" title="Preview">👁</button>
+        <button class="att-btn del" onclick="removePendingAtt(${i})" title="Remove">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function removePendingAtt(i) {
+  pendingAtts.splice(i, 1);
+  renderPendingAtts();
+}
+
+// ── Preview / Viewer ──
+function previewAtt(att) {
+  viewerCurrent = att;
+  document.getElementById('viewer-title').textContent = att.name;
+  const body = document.getElementById('viewer-body');
+  if(isImage(att.name)) {
+    body.innerHTML = `<img src="${att.data}" alt="${att.name}" style="max-width:100%;max-height:70vh;border-radius:8px">`;
+  } else if(att.name.endsWith('.pdf')) {
+    body.innerHTML = `<iframe src="${att.data}" style="width:min(700px,90vw);height:70vh;border:none;border-radius:8px"></iframe>`;
+  } else {
+    const t = attTypeLabel(att.name);
+    body.innerHTML = `<div class="no-preview">
+      <div style="font-size:48px;margin-bottom:12px">${t.icon}</div>
+      <div style="font-weight:500;margin-bottom:6px">${att.name}</div>
+      <div style="color:var(--color-text-tertiary);font-size:12px">${fmtSize(att.size)} · ${t.label}</div>
+      <div style="margin-top:16px;font-size:12px;color:var(--color-text-secondary)">Preview not available — click ⬇ to download</div>
+    </div>`;
+  }
+  document.getElementById('viewer-overlay').classList.add('on');
+}
+
+function closeViewer() {
+  document.getElementById('viewer-overlay').classList.remove('on');
+  document.getElementById('viewer-body').innerHTML = '';
+  viewerCurrent = null;
+}
+
+function viewerDownload() {
+  if(!viewerCurrent) return;
+  const a = document.createElement('a');
+  a.href = viewerCurrent.data;
+  a.download = viewerCurrent.name;
+  a.click();
+}
+
+// ── View attachment from transaction ──
+function viewTxAtt(txId, attId) {
+  const tx = txns.find(t => t.id === txId);
+  if(!tx || !tx.attachments) return;
+  const att = tx.attachments.find(a => a.id === attId);
+  if(att) previewAtt(att);
+}
+
+// ── Download attachment from transaction ──
+function downloadTxAtt(txId, attId) {
+  const tx = txns.find(t => t.id === txId);
+  if(!tx || !tx.attachments) return;
+  const att = tx.attachments.find(a => a.id === attId);
+  if(att) { viewerCurrent = att; viewerDownload(); }
+}
+
+// ── Clear pending after submit ──
+function clearPendingAtts() {
+  pendingAtts = [];
+  renderPendingAtts();
+}
+
+// ── Render transaction attachments in ledger row ──
+function renderTxAtts(tx) {
+  if(!tx.attachments || !tx.attachments.length) return '';
+  return tx.attachments.map(att => {
+    const t = attTypeLabel(att.name);
+    const thumb = isImage(att.name)
+      ? `<div class="tx-att-thumb" onclick="viewTxAtt(${tx.id},${att.id})"><img src="${att.data}" alt="${att.name}"><span class="file-lbl">${att.name}</span></div>`
+      : `<div class="tx-att-thumb" onclick="viewTxAtt(${tx.id},${att.id})"><div class="file-icon">${t.icon}<span style="font-size:9px;color:var(--color-text-tertiary)">${t.label}</span></div><span class="file-lbl">${att.name}</span></div>`;
+    return thumb;
+  }).join('');
+}
+
+// ── Attachment count badge for table ──
+function attCountBadge(tx, label) {
+  if(!tx.attachments || !tx.attachments.length) return '';
+  return `<span class="att-badge" onclick="toggleTxDetail(${tx.id})">${tx.attachments.length} ${label||'file'}</span>`;
+}
+
+// ── Toggle attachment detail panel ──
+function toggleTxDetail(txId) {
+  const el = document.getElementById('txd-'+txId);
+  if(!el) return;
+  el.classList.toggle('on');
+  if(el.classList.contains('on')) {
+    const tx = txns.find(t => t.id === txId);
+    if(tx) el.innerHTML = `
+      <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px">
+        📎 ${tx.attachments.length} attachment${tx.attachments.length>1?'s':''} — مرفقات
+      </div>
+      <div class="tx-detail-atts">${renderTxAtts(tx)}</div>`;
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════
+// EXPORT SYSTEM
+// ═══════════════════════════════════════════════════════
+let currentExpFormat = null;
+
+function openExpModal() {
+  document.getElementById('exp-overlay').classList.add('on');
+  document.getElementById('exp-options').classList.remove('on');
+  currentExpFormat = null;
+}
+function closeExpModal() {
+  document.getElementById('exp-overlay').classList.remove('on');
+  document.querySelectorAll('.exp-card').forEach(c=>c.classList.remove('active'));
+}
+
+function selectExpFormat(fmt) {
+  currentExpFormat = fmt;
+  document.querySelectorAll('.exp-card').forEach(c=>c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  const opts = document.getElementById('exp-options');
+  const optTitle = document.getElementById('exp-opt-title');
+  const incl = document.getElementById('exp-include-opts');
+  opts.classList.add('on');
+
+  const titles = {
+    csv:'CSV / Excel export options', print:'Print / PDF options',
+    vat:'VAT return export options', zakat:'Zakat statement options',
+    json:'Backup options', html:'HTML report options'
+  };
+  optTitle.textContent = titles[fmt]||'Options';
+
+  const inclHTML = {
+    csv:`<div class="exp-check-row"><input type="checkbox" id="inc-all" checked><label for="inc-all">All transactions (sales, purchases, expenses)</label></div>
+         <div class="exp-check-row"><input type="checkbox" id="inc-atts"><label for="inc-atts">Include attachment filenames</label></div>
+         <div class="exp-check-row"><input type="checkbox" id="inc-hijri" checked><label for="inc-hijri">Include Hijri month & VAT quarter columns</label></div>`,
+    print:`<div class="exp-check-row"><input type="checkbox" id="pr-income" checked><label for="pr-income">Income statement — قائمة الدخل</label></div>
+           <div class="exp-check-row"><input type="checkbox" id="pr-vat" checked><label for="pr-vat">VAT quarterly summary — ملخص ض.ق.م</label></div>
+           <div class="exp-check-row"><input type="checkbox" id="pr-zakat" checked><label for="pr-zakat">Zakat calculation — حساب الزكاة</label></div>`,
+    vat:`<div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;padding:8px;background:var(--color-background-info);border-radius:6px">
+         Exports a formatted VAT summary per quarter with output VAT, input VAT, and net payable — ready to enter in the ZATCA VAT portal.<br>
+         <span style="direction:rtl;display:block;margin-top:4px">يصدر ملخص ضريبة القيمة المضافة لكل ربع سنة جاهزاً للإدخال في بوابة هيئة الزكاة</span></div>`,
+    zakat:`<div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6;padding:8px;background:var(--color-background-warning);border-radius:6px">
+           Exports the Zakat annual calculation with revenue, expenses, net profit and estimated Zakat base — ready to reference when filling the ZATCA Zakat return.<br>
+           <span style="direction:rtl;display:block;margin-top:4px">يصدر حساب الزكاة السنوي جاهزاً للرجوع إليه عند تعبئة نموذج الزكاة في هيئة الزكاة</span></div>`,
+    json:`<div class="exp-check-row"><input type="checkbox" id="json-atts" checked><label for="json-atts">Include file attachments (larger file size)</label></div>
+          <div class="exp-check-row"><input type="checkbox" id="json-meta" checked><label for="json-meta">Include metadata (dates, app version)</label></div>`,
+    html:`<div class="exp-check-row"><input type="checkbox" id="html-logo" checked><label for="html-logo">Include establishment name & header</label></div>
+          <div class="exp-check-row"><input type="checkbox" id="html-atts"><label for="html-atts">Include attachment thumbnails</label></div>`
+  };
+  incl.innerHTML = inclHTML[fmt]||'';
+
+  const btnLabels = {
+    csv:'Download CSV ↓', print:'Open Print Dialog 🖨',
+    vat:'Download VAT Summary ↓', zakat:'Download Zakat Summary ↓',
+    json:'Download Backup ↓', html:'Download HTML Report ↓'
+  };
+  document.getElementById('exp-go-btn').textContent = btnLabels[fmt]||'Export ↓';
+}
+
+function updateExpOptions() {
+  const period = document.getElementById('exp-period-type').value;
+  document.getElementById('exp-month-sel').style.display = period==='month'?'':'none';
+}
+
+function getFilteredTxns() {
+  const period = document.getElementById('exp-period-type')?.value||'all';
+  const month  = document.getElementById('exp-month-sel')?.value||'';
+  const qMap   = {q1:'Q1',q2:'Q2',q3:'Q3',q4:'Q4'};
+  if(period==='all') return txns;
+  if(period in qMap) return txns.filter(t=>t.q===qMap[period]);
+  if(period==='month') return txns.filter(t=>t.hijri&&t.hijri.includes(month));
+  return txns;
+}
+
+function runExport() {
+  if(!currentExpFormat) { toast('⚠ Select an export format first'); return; }
+  const data = getFilteredTxns();
+  if(!data.length) { toast('⚠ No transactions in selected period'); return; }
+
+  switch(currentExpFormat) {
+    case 'csv':    expCSV(data); break;
+    case 'print':  expPrint(); break;
+    case 'vat':    expVAT(data); break;
+    case 'zakat':  expZakat(data); break;
+    case 'json':   expJSON(data); break;
+    case 'html':   expHTML(data); break;
+  }
+  closeExpModal();
+}
+
+// ── CSV EXPORT ────────────────────────────────────────────────────────────────
+function expCSV(data) {
+  var incHijri = document.getElementById('inc-hijri') ? document.getElementById('inc-hijri').checked !== false : true;
+  var incAtts  = document.getElementById('inc-atts') ? document.getElementById('inc-atts').checked : false;
+
+  var hdrs = ['Date','Type','Category','Description','Supplier / Payee','Branch'];
+  if(incHijri) hdrs = hdrs.concat(['Hijri Month','Arabic','VAT Quarter']);
+  hdrs = hdrs.concat(['VAT?','Amount excl. VAT (SAR)','VAT 15% (SAR)','Total incl. VAT (SAR)','Invoice No.','Notes']);
+  if(incAtts) hdrs.push('Attachments');
+
+  var rows = data.map(function(t) {
+    var r = [
+      t.date,
+      t.type==='s'?'Sales':t.type==='p'?'Purchase':'Expense',
+      t.catL||'',
+      '"'+(t.desc||'').replace(/"/g,'""')+'"',
+      '"'+(t.sup||'').replace(/"/g,'""')+'"',
+      t.branch||''
+    ];
+    if(incHijri) r = r.concat([t.hijri||'',t.hijriAr||'',t.q||'']);
+    r = r.concat([
+      t.vatOn?'YES':'NO',
+      t.amount.toFixed(2),
+      t.vat.toFixed(2),
+      t.total.toFixed(2),
+      t.inv||'',
+      '"'+(t.notes||'').replace(/"/g,'""')+'"'
+    ]);
+    if(incAtts) r.push(t.attachments ? t.attachments.map(function(a){return a.name;}).join('; ') : '');
+    return r.join(',');
+  });
+
+  var totRev  = data.reduce(function(s,t){return s+(t.type==='s'?t.amount:0);},0);
+  var totExp  = data.reduce(function(s,t){return s+(t.type!=='s'?t.amount:0);},0);
+  var totVAT  = data.reduce(function(s,t){return s+t.vat;},0);
+
+  var _p = incHijri ? ',,,' : '';
+  rows.push('');
+  rows.push('"SUMMARY — ملخص",,,,,,'+_p+',,,,');
+  rows.push('"Total Revenue (excl. VAT)","'+totRev.toFixed(2)+'",,,,,,'+_p+',,,');
+  rows.push('"Total Expenses","'+totExp.toFixed(2)+'",,,,,,'+_p+',,,');
+  rows.push('"Net Profit","'+(totRev-totExp).toFixed(2)+'",,,,,,'+_p+',,,');
+  rows.push('"Total VAT in file","'+totVAT.toFixed(2)+'",,,,,,'+_p+',,,');
+
+  var bom = '\uFEFF';
+  var csv = bom + [hdrs.join(',')].concat(rows).join('\n');
+  dl(csv, 'Kafeel_Transactions_'+ACTIVE_YEAR+'.csv', 'text/csv;charset=utf-8');
+  toast('\uD83D\uDCCA CSV exported \u2014 '+data.length+' transactions');
+}
+
+// ── PRINT / PDF ───────────────────────────────────────────────────────────────
+function expPrint() {
+  // Switch to reports view, then print
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.getElementById('vr').classList.add('on');
+  rreports();
+  setTimeout(()=>window.print(), 400);
+}
+
+// ── VAT RETURN SUMMARY ────────────────────────────────────────────────────────
+function expVAT(data) {
+  const qData = {Q1:{outV:0,inV:0,txns:[]},Q2:{outV:0,inV:0,txns:[]},Q3:{outV:0,inV:0,txns:[]},Q4:{outV:0,inV:0,txns:[]}};
+  data.forEach(t=>{
+    const q=t.q||'Q1';
+    if(!qData[q]) return;
+    if(t.type==='s') qData[q].outV+=t.vat;
+    else qData[q].inV+=t.vat;
+    qData[q].txns.push(t);
+  });
+  const deads=getVATDeadlines();
+  const gregRng={Q1:'07 Jul – 03 Oct 2024',Q2:'04 Oct – 31 Dec 2024',Q3:'01 Jan – 28 Apr 2025',Q4:'29 Apr – 25 Jun 2025'};
+
+  let csv = '\uFEFF';
+  csv += 'KAFEEL ESTABLISHMENT — VAT RETURN SUMMARY — ملخص إقرار ضريبة القيمة المضافة\n';
+  csv += 'Hijri Year '+ACTIVE_YEAR+' | السنة الهجرية '+ACTIVE_YEAR+'\n\n';
+
+  ['Q1','Q2','Q3','Q4'].forEach(q=>{
+    const d=qData[q], net=d.outV-d.inV;
+    csv += `${q} — ${gregRng[q]}\n`;
+    csv += `Output VAT (ضريبة المخرجات),${d.outV.toFixed(2)}\n`;
+    csv += `Input VAT claimable (ضريبة المدخلات),(${d.inV.toFixed(2)})\n`;
+    csv += `Net VAT payable to ZATCA (صافي الضريبة المستحقة),${Math.max(net,0).toFixed(2)}\n`;
+    csv += `${net<0?'VAT Credit (زيادة مدخلات)':''}${net<0?','+Math.abs(net).toFixed(2):''}\n`;
+    csv += `Filing deadline (موعد التقديم),${deads[q]}\n`;
+    csv += `Number of transactions,${d.txns.length}\n\n`;
+  });
+
+  const totOut=data.filter(t=>t.type==='s').reduce((s,t)=>s+t.vat,0);
+  const totIn =data.filter(t=>t.type!=='s').reduce((s,t)=>s+t.vat,0);
+  csv += `ANNUAL TOTAL — الإجمالي السنوي\n`;
+  csv += `Total output VAT,${totOut.toFixed(2)}\n`;
+  csv += `Total input VAT,(${totIn.toFixed(2)})\n`;
+  csv += `Annual net VAT,${(totOut-totIn).toFixed(2)}\n`;
+
+  dl(csv, 'Kafeel_VAT_Return_' + ACTIVE_YEAR + '.csv', 'text/csv;charset=utf-8');
+  toast('📋 VAT summary exported');
+}
+
+// ── ZAKAT STATEMENT ───────────────────────────────────────────────────────────
+function expZakat(data) {
+  const rev  = data.filter(t=>t.type==='s').reduce((s,t)=>s+t.amount,0);
+  const cogs = data.filter(t=>t.type!=='s'&&(t.cat.includes('Purchases')||t.cat.includes('Pack')||t.cat.includes('Trans'))).reduce((s,t)=>s+t.amount,0);
+  const pay  = data.filter(t=>t.cat.includes('Salary')||t.cat.includes('GOSI')||t.cat.includes('End')).reduce((s,t)=>s+t.amount,0);
+  const rent = data.filter(t=>t.cat.includes('Rent')||t.cat.includes('Elec')||t.cat.includes('Water')).reduce((s,t)=>s+t.amount,0);
+  const govf = data.filter(t=>['Qiwa','Jawaz','Munic','License','Civil','Work','Expat','Nita','Labour','SFDA','Health','Medical','Chamber'].some(k=>t.cat.includes(k))).reduce((s,t)=>s+t.amount,0);
+  const oth  = data.filter(t=>t.type!=='s').reduce((s,t)=>s+t.amount,0) - cogs - pay - rent - govf;
+  const exp  = cogs+pay+rent+govf+Math.max(oth,0);
+  const profit = rev - exp;
+  const zakatBase = Math.max(profit,0);
+  const zakatDue  = zakatBase * 0.025;
+
+  let csv = '\uFEFF';
+  csv += 'KAFEEL ESTABLISHMENT — ZAKAT ANNUAL STATEMENT — قائمة الزكاة السنوية\n';
+  csv += 'Hijri Year '+ACTIVE_YEAR+' ('+yearGregorianRange(ACTIVE_YEAR)+') | السنة الهجرية '+ACTIVE_YEAR+'\n\n';
+  csv += 'INCOME STATEMENT — قائمة الدخل\n';
+  csv += `Total Revenue (إجمالي الإيرادات),${rev.toFixed(2)}\n`;
+  csv += `Cost of Goods / Purchases (تكلفة البضاعة),(${cogs.toFixed(2)})\n`;
+  csv += `Payroll (الرواتب),(${pay.toFixed(2)})\n`;
+  csv += `Rent & Utilities (الإيجار والمرافق),(${rent.toFixed(2)})\n`;
+  csv += `Government Fees (الرسوم الحكومية),(${govf.toFixed(2)})\n`;
+  csv += `Other Expenses (مصروفات أخرى),(${Math.max(oth,0).toFixed(2)})\n`;
+  csv += `Net Profit (صافي الربح),${profit.toFixed(2)}\n\n`;
+  csv += 'ZAKAT CALCULATION — حساب الزكاة\n';
+  csv += `Estimated Zakat base (الوعاء الزكوي التقديري),${zakatBase.toFixed(2)}\n`;
+  csv += `Zakat rate (معدل الزكاة),2.5%\n`;
+  csv += `Estimated Zakat due (الزكاة التقديرية المستحقة),${zakatDue.toFixed(2)}\n`;
+  csv += `Saudi shareholder % (نسبة سعودية),100%\n`;
+  csv += `Filing deadline (موعد التقديم),23 Oct 2025\n`;
+  csv += `Filing window (نافذة التقديم),120 days from 25 Jun 2025\n\n`;
+  csv += 'NOTE: This is an estimate. Final Zakat base is determined by ZATCA using your full balance sheet.\n';
+  csv += 'ملاحظة: هذا تقدير. يتم تحديد الوعاء الزكوي الفعلي من قبل هيئة الزكاة بناءً على ميزانيتك العمومية الكاملة.\n';
+
+  dl(csv, 'Kafeel_Zakat_Statement_' + ACTIVE_YEAR + '.csv', 'text/csv;charset=utf-8');
+  toast('🕌 Zakat statement exported');
+}
+
+// ── JSON BACKUP ───────────────────────────────────────────────────────────────
+function expJSON(data) {
+  const inclAtts = document.getElementById('json-atts')?.checked !== false;
+  const inclMeta = document.getElementById('json-meta')?.checked !== false;
+
+  const exportData = {
+    txns: inclAtts ? data : data.map(t=>({...t,attachments:t.attachments?.map(a=>({...a,data:'[EXCLUDED]'}))||[]}))
+  };
+  if(inclMeta) {
+    exportData.meta = {
+      exportedAt: new Date().toISOString(),
+      appVersion: 'Kafeel Books 2.0',
+      hijriYear: String(ACTIVE_YEAR),
+      establishment: 'Kafeel — مؤسسة كفيل',
+      totalTransactions: data.length,
+      totalRevenue: data.filter(t=>t.type==='s').reduce((s,t)=>s+t.amount,0),
+      totalExpenses: data.filter(t=>t.type!=='s').reduce((s,t)=>s+t.amount,0)
+    };
+  }
+  dl(JSON.stringify(exportData,null,2), `Kafeel_Backup_${ACTIVE_YEAR}_${new Date().toISOString().slice(0,10)}.json`, 'application/json');
+  toast('💾 Full backup exported');
+}
+
+// ── HTML REPORT ───────────────────────────────────────────────────────────────
+function expHTML(data) {
+  const inclLogo = document.getElementById('html-logo')?.checked !== false;
+
+  const rev   = data.filter(t=>t.type==='s').reduce((s,t)=>s+t.amount,0);
+  const exp   = data.filter(t=>t.type!=='s').reduce((s,t)=>s+t.amount,0);
+  const outV  = data.filter(t=>t.type==='s').reduce((s,t)=>s+t.vat,0);
+  const inV   = data.filter(t=>t.type!=='s').reduce((s,t)=>s+t.vat,0);
+  const profit= rev-exp;
+  const zakat = Math.max(profit,0)*0.025;
+
+  const fmtN = n=>Number(n).toLocaleString('en-SA',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const rows = data.map(t=>`
+    <tr>
+      <td>${t.date}</td>
+      <td><span style="padding:2px 8px;border-radius:12px;font-size:11px;background:${t.type==='s'?'#d4edda':t.type==='p'?'#fff3cd':'#f8d7da'};color:${t.type==='s'?'#155724':t.type==='p'?'#856404':'#721c24'}">${t.type==='s'?'Sales':t.type==='p'?'Purchase':'Expense'}</span></td>
+      <td>${t.catL||t.cat}</td>
+      <td>${t.desc}</td>
+      <td>${t.hijri}</td>
+      <td>${t.q}</td>
+      <td>${t.vatOn?'YES':'NO'}</td>
+      <td style="text-align:right;color:${t.type==='s'?'#155724':'#721c24'}">${t.type==='s'?'+':'-'}${fmtN(t.amount)}</td>
+      <td style="text-align:right">${fmtN(t.vat)}</td>
+      <td style="text-align:right;font-weight:600">${t.type==='s'?'+':'-'}${fmtN(t.total)}</td>
+    </tr>`).join('');
+
+  const report = `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kafeel Books — Report</title>
+<style>
+  body{font-family:Arial,sans-serif;font-size:13px;color:#1a2535;margin:0;padding:20px;background:#f5f7fa}
+  .report-header{background:#0e7864;color:#fff;padding:20px 24px;border-radius:10px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+  .rh-title{font-size:20px;font-weight:600;margin-bottom:4px}
+  .rh-sub{font-size:12px;opacity:.8}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+  .kpi{background:#fff;border:1px solid #e2e7ef;border-radius:8px;padding:14px 16px}
+  .kpi-l{font-size:10px;color:#7a90a8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+  .kpi-v{font-size:22px;font-weight:600}
+  .section{background:#fff;border:1px solid #e2e7ef;border-radius:10px;padding:16px 20px;margin-bottom:16px}
+  .section h2{font-size:13px;color:#4a6080;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #eee}
+  table{width:100%;border-collapse:collapse}
+  thead th{background:#f5f7fa;padding:8px 10px;text-align:left;font-size:11px;color:#7a90a8;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #e2e7ef}
+  tbody td{padding:7px 10px;border-bottom:.5px solid #eee;font-size:12px}
+  tbody tr:hover{background:#f9fafb}
+  .vat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .vat-q{background:#f5f7fa;border-radius:8px;padding:12px;border:1px solid #e2e7ef}
+  .vq-title{font-weight:600;color:#0e7864;margin-bottom:8px;font-size:13px}
+  .vq-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;color:#4a6080}
+  .vq-val{font-family:monospace;font-weight:600;color:#1a2535}
+  .footer{text-align:center;color:#a0b0c0;font-size:10px;margin-top:20px;padding-top:12px;border-top:1px solid #e2e7ef}
+  @media print{body{background:#fff;padding:0}}
+</style>
+</head>
+<body>
+${inclLogo?`<div class="report-header">
+  <div><div class="rh-title">Kafeel Establishment — مؤسسة كفيل</div>
+  <div class="rh-sub">Financial Report — Hijri Year ${ACTIVE_YEAR}</div></div>
+  <div style="text-align:right;direction:rtl"><div style="font-size:16px;font-weight:600">التقرير المالي</div><div style="font-size:11px;opacity:.8">السنة الهجرية ${ACTIVE_YEAR}</div></div>
+</div>`:''}
+<div class="kpi-row">
+  <div class="kpi"><div class="kpi-l">Revenue — إيرادات</div><div class="kpi-v" style="color:#1a7a40">SAR ${fmtN(rev)}</div></div>
+  <div class="kpi"><div class="kpi-l">Expenses — مصروفات</div><div class="kpi-v" style="color:#c03030">SAR ${fmtN(exp)}</div></div>
+  <div class="kpi"><div class="kpi-l">Net Profit — صافي ربح</div><div class="kpi-v" style="color:${profit>=0?'#1a7a40':'#c03030'}">SAR ${fmtN(profit)}</div></div>
+  <div class="kpi"><div class="kpi-l">Zakat Est. — زكاة تقديرية</div><div class="kpi-v" style="color:#c27a10">SAR ${fmtN(zakat)}</div></div>
+</div>
+<div class="section">
+  <h2>VAT Quarterly Summary — ملخص ض.ق.م</h2>
+  <div class="vat-grid">
+    ${['Q1','Q2','Q3','Q4'].map(q=>{
+      const qTxns=data.filter(t=>t.q===q);
+      const qOut=qTxns.filter(t=>t.type==='s').reduce((s,t)=>s+t.vat,0);
+      const qIn=qTxns.filter(t=>t.type!=='s').reduce((s,t)=>s+t.vat,0);
+      const net=qOut-qIn;
+      return `<div class="vat-q"><div class="vq-title">${q}</div>
+        <div class="vq-row"><span>Output VAT</span><span class="vq-val">${fmtN(qOut)}</span></div>
+        <div class="vq-row"><span>Input VAT</span><span class="vq-val">(${fmtN(qIn)})</span></div>
+        <div class="vq-row" style="border-top:1px solid #ddd;margin-top:4px;padding-top:4px;font-weight:600"><span>Net payable</span><span class="vq-val" style="color:${net>=0?'#c27a10':'#1a7a40'}">${fmtN(Math.abs(net))}</span></div>
+      </div>`;
+    }).join('')}
+  </div>
+</div>
+<div class="section">
+  <h2>All Transactions — جميع المعاملات (${data.length})</h2>
+  <table>
+    <thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Hijri</th><th>Q</th><th>VAT?</th><th style="text-align:right">Amount</th><th style="text-align:right">VAT</th><th style="text-align:right">Total</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+</div>
+<div class="footer">Generated by Kafeel Books App — ${new Date().toLocaleDateString('en-SA')} | تم الإنشاء بواسطة تطبيق كتب كفيل
+<!-- AI CATEGORY MANAGER VIEW -->
+<div class="view" id="vai">
+  <div style="max-width: 800px; margin: 0 auto;">
+    
+    <div style="background: linear-gradient(135deg, #0e7864 0%, #0a5a4d 100%); color: white; padding: 20px 24px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(14,120,100,0.15);">
+      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 6px;">🤖 AI Category Manager</h2>
+      <p style="font-size: 13px; opacity: 0.9; margin: 0;">Intelligent assistant for adding new categories to your books</p>
+    </div>
+
+    <div style="background: #e7f3ff; border: 1px solid #3b82f6; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: #1e40af; line-height: 1.6;">
+      💡 <strong>How it works:</strong> Describe what you want to track (in English or Arabic), and AI will suggest the proper category name, Arabic translation, VAT setting, and give you the exact code to add.
+    </div>
+
+    <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 16px;">
+      <div style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: #1a2535;">Step 1: Describe Your New Category</div>
+      
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #4a6080; margin-bottom: 6px;">What do you want to track?</label>
+        <textarea id="ai-input" style="width: 100%; padding: 12px; border: 1px solid #d1d9e6; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 100px;" placeholder="Examples:
+• Monthly internet and phone bills
+• New freezer equipment 
+• Marketing costs for flyers
+• Cleaning supplies
+• تكاليف الصيانة (maintenance costs)
+
+Be specific — the AI will understand!"></textarea>
+      </div>
+
+      <button onclick="analyzeWithAI()" id="ai-analyze-btn" style="background: #0e7864; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+        ✨ Analyze with AI
+      </button>
+    </div>
+
+    <div id="ai-results"></div>
+
+    <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+      <div style="font-size: 15px; font-weight: 600; margin-bottom: 16px; color: #1a2535;">Current Categories</div>
+      <div id="ai-current-cats" style="max-height: 400px; overflow-y: auto; background: #f9fafb; border: 1px solid #e2e7ef; border-radius: 8px; padding: 12px;">
+        <div style="text-align: center; padding: 20px; color: #7a90a8;">Loading categories...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</body></html>`;
+
+  dl(report, 'Kafeel_Report_' + ACTIVE_YEAR + '.html', 'text/html;charset=utf-8');
+  toast('📄 HTML report exported — share with your accountant');
+}
+
+// ── Download helper ───────────────────────────────────────────────────────────
+function dl(content, filename, mime) {
+  const blob = new Blob([content], {type: mime});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+
+
+// ═══════════════════════════════════════════════════════
+// MULTI-YEAR HIJRI CALENDAR  — يدعم سنوات هجرية متعددة
+// Covers Hijri 1443 – 1450  (Gregorian 2021 – 2029)
+// Source: Umm Al-Qura / Saudi official calendar
+// ═══════════════════════════════════════════════════════
+
+
+
+
+
+// Currently active year
+
+
+
+// Get full list of available years
+function availableYears() { return Object.keys(HIJRI_YEARS).map(Number).sort(); }
+
+// Switch active year — reloads calendar and updates all UI
+function setActiveYear(yr) {
+  yr = parseInt(yr);
+  if(!HIJRI_YEARS[yr]) { toast('⚠ Year '+yr+' not in calendar data'); return; }
+  ACTIVE_YEAR = yr;
+  HC = HIJRI_YEARS[yr];
+  // Update nav logo year
+  const logoYr = document.getElementById('logo-year');
+  if(logoYr) logoYr.textContent = yr + 'هـ';
+  // Update storage key so years don't mix
+  updateStorageKey();
+  // Update Drive file name
+  updateDriveFileName();
+  // Update Hijri mode button label
+  const hmBtn = document.getElementById('dmh');
+  if(hmBtn) {
+    const lbl = document.getElementById('h-yr-lbl');
+    if(lbl) lbl.textContent = yr;
+  }
+  // Reload data for this year
+  loadYearData();
+  updateReportYearLabels();
+  // Close year picker if open
+  document.getElementById('yr-picker').style.display = 'none';
+  toast('📅 Switched to Hijri ' + yr + ' — تم التبديل إلى ' + yr + ' هـ');
+}
+
+// Each year has its own localStorage key
+function storageKey() { return 'kafeel_txns_' + ACTIVE_YEAR; }
+
+function updateStorageKey() {
+  // Save current txns then reload for new year
+}
+
+function updateDriveFileName() {
+  if(typeof GD_FILE_NAME !== 'undefined') {
+    window.GD_FILE_NAME_CURRENT = 'Kafeel_Books_' + ACTIVE_YEAR + '.json';
+  }
+}
+
+function loadYearData() {
+  txns = JSON.parse(localStorage.getItem(storageKey()) || '[]');
+  uall();
+  // Reset calendars
+  gF = null; gT = null; hF = null; hT = null;
+  updG(); updH();
+}
+
+// Override save() to use year-specific key
+const _origSave = typeof _baseSave === 'function' ? _baseSave : () => {};
+function save() {
+  localStorage.setItem(storageKey(), JSON.stringify(txns));
+}
+
+// Get year summary for year switcher dropdown
+function yearSummary(yr) {
+  const data = JSON.parse(localStorage.getItem('kafeel_txns_' + yr) || '[]');
+  if(!data.length) return 'No data';
+  const rev = data.filter(t=>t.type==='s').reduce((s,t)=>s+t.amount,0);
+  return data.length + ' entries · SAR ' + Math.round(rev).toLocaleString();
+}
+
+// VAT quarter deadlines — dynamic per year
+function vatDeadlines(yr) {
+  const y = HIJRI_YEARS[yr];
+  if(!y) return {};
+  const addDays = (dateStr, n) => {
+    const d = new Date(dateStr); d.setDate(d.getDate()+n);
+    return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  };
+  const q3end = y.find(m=>m.q==='Q3'&&m.n===10)?.t || y[9]?.t;
+  const q4end = y[11]?.t;
+  const q1end = y.find(m=>m.q==='Q1'&&m.n===3)?.t || y[2]?.t;
+  const q2end = y.find(m=>m.q==='Q2'&&m.n===6)?.t || y[5]?.t;
+  return {
+    Q1: addDays(q1end, 30),
+    Q2: addDays(q2end, 30),
+    Q3: addDays(q3end, 30),
+    Q4: addDays(q4end, 30),
+  };
+}
+
+// Zakat filing deadline (120 days after Dhul Hijjah end)
+function zakatDeadline(yr) {
+  const y = HIJRI_YEARS[yr];
+  if(!y) return 'N/A';
+  const dhEnd = y[11]?.t;
+  if(!dhEnd) return 'N/A';
+  const d = new Date(dhEnd); d.setDate(d.getDate()+120);
+  return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+}
+
+// Year range of a given Hijri year
+function yearGregorianRange(yr) {
+  const y = HIJRI_YEARS[yr];
+  if(!y) return '';
+  const start = new Date(y[0].f).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  const end   = new Date(y[11].t).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  return start + ' – ' + end;
+}
+
+// hijriFor — now year-aware
+function hijriFor(d) {
+  // Search all years
+  for(const yr of Object.keys(HIJRI_YEARS)) {
+    const found = HIJRI_YEARS[yr].find(m=>d>=m.f&&d<=m.t);
+    if(found) return {...found, hijriYear: parseInt(yr)};
+  }
+  return null;
+}
+
+
+function openYearPicker() {
+  const el = document.getElementById('yr-picker');
+  const grid = document.getElementById('yp-grid');
+  const yrs = availableYears();
+  grid.innerHTML = yrs.map(yr => {
+    const isCurrent = yr === ACTIVE_YEAR;
+    const greg = yearGregorianRange(yr);
+    const summary = yearSummary(yr);
+    return `<div class="yp-card ${isCurrent?'current':''}" onclick="setActiveYear(${yr})">
+      <div class="yp-yr">${yr} هـ</div>
+      <div class="yp-greg">${greg}</div>
+      <div class="yp-summary">${summary}</div>
+      ${isCurrent?'<span class="yp-badge">Active — نشط</span>':''}
+    </div>`;
+  }).join('');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// Close picker when clicking outside
+document.addEventListener('click', e => {
+  const picker = document.getElementById('yr-picker');
+  const pill   = document.getElementById('yr-pill-btn');
+  if(picker && !picker.contains(e.target) && !pill?.contains(e.target)) {
+    picker.style.display = 'none';
+  }
+});
+
+// Override vatDeadlines references in export functions
+function getVATDeadlines() { return vatDeadlines(ACTIVE_YEAR); }
+function getZakatDeadline() { return zakatDeadline(ACTIVE_YEAR); }
+function getYearRange() { return yearGregorianRange(ACTIVE_YEAR); }
+
+
+// ── INIT: load active year data ──
+(function initApp() {
+  // Default to 1446 or last used year
+  const lastYear = parseInt(localStorage.getItem('kafeel_active_year') || '1446');
+  if(HIJRI_YEARS[lastYear]) {
+    ACTIVE_YEAR = lastYear;
+    HC = HIJRI_YEARS[ACTIVE_YEAR];
+  }
+  // Persist active year
+  const origSetActive = setActiveYear;
+  window.setActiveYear = function(yr) {
+    origSetActive(yr);
+    localStorage.setItem('kafeel_active_year', yr);
+  };
+  // Load data
+  txns = JSON.parse(localStorage.getItem(storageKey()) || '[]');
+  // Update UI
+  const logoYr = document.getElementById('logo-year');
+  if(logoYr) logoYr.textContent = ACTIVE_YEAR + 'هـ';
+  const hmBtn = document.getElementById('dmh');
+  if(hmBtn) hmBtn.textContent = '🌙 Hijri ' + ACTIVE_YEAR + ' — هجري';
+  calc(); uall();
+})();
+
+// ── Year-aware helper functions ────────────────────────────────────────────
+function getVATDeadlines() {
+  // Compute deadlines: 30 days after end of each quarter's last month
+  const y = HIJRI_YEARS[ACTIVE_YEAR];
+  if(!y) return {Q1:'—',Q2:'—',Q3:'—',Q4:'—'};
+  const Q1end = new Date(y[2].t); Q1end.setDate(Q1end.getDate()+30);
+  const Q2end = new Date(y[5].t); Q2end.setDate(Q2end.getDate()+30);
+  const Q3end = new Date(y[9].t); Q3end.setDate(Q3end.getDate()+30);
+  const Q4end = new Date(y[11].t); Q4end.setDate(Q4end.getDate()+30);
+  const f = d => d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  return {Q1:f(Q1end), Q2:f(Q2end), Q3:f(Q3end), Q4:f(Q4end)};
+}
+
+function getQGregorianRanges() {
+  const y = HIJRI_YEARS[ACTIVE_YEAR];
+  if(!y) return {Q1:'—',Q2:'—',Q3:'—',Q4:'—'};
+  const f = d => new Date(d).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  return {
+    Q1: f(y[0].f)+' – '+f(y[2].t),
+    Q2: f(y[3].f)+' – '+f(y[5].t),
+    Q3: f(y[6].f)+' – '+f(y[9].t),
+    Q4: f(y[10].f)+' – '+f(y[11].t)
+  };
+}
+
+function getZakatDeadline() {
+  const y = HIJRI_YEARS[ACTIVE_YEAR];
+  if(!y) return '—';
+  const end = new Date(y[11].t);
+  end.setDate(end.getDate()+120);
+  return end.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+}
+
+function updateReportYearLabels() {
+  const el1 = document.getElementById('rpt-yr-hdr');
+  const el2 = document.getElementById('rpt-inc-yr');
+  if(el1) el1.textContent = '(Hijri '+ACTIVE_YEAR+')';
+  if(el2) el2.textContent = '(Hijri '+ACTIVE_YEAR+')';
+  // Update GD filename displays
+  const gdf = document.getElementById('gd-fname');
+  if(gdf) gdf.textContent = 'Kafeel_Books_'+ACTIVE_YEAR+'.json';
+  const gdm = document.getElementById('gd-yr-modal');
+  if(gdm) gdm.textContent = ACTIVE_YEAR;
+  // Update export dropdown year label
+  const expOpt = document.getElementById('exp-yr-opt');
+  if(expOpt) expOpt.textContent = 'Full year '+ACTIVE_YEAR+' — السنة كاملة';
+  // Update h-yr-lbl in Hijri button
+  const hyrLbl = document.getElementById('h-yr-lbl');
+  if(hyrLbl) hyrLbl.textContent = ACTIVE_YEAR;
+  var logoYr = document.getElementById('logo-year');
+  if(logoYr) logoYr.textContent = ACTIVE_YEAR + 'هـ';
+}
+
+
+
+// ═══════════════════════════════════════════════════════
+// AI CATEGORY MANAGER
+// ═══════════════════════════════════════════════════════
+
+function loadCurrentCategories() {
+  const container = document.getElementById('ai-current-cats');
+  if (!container) return;
+  
+  const catSelect = document.getElementById('cat');
+  if (!catSelect) return;
+  
+  let html = '';
+  const optgroups = catSelect.querySelectorAll('optgroup');
+  
+  optgroups.forEach(group => {
+    const label = group.getAttribute('label');
+    html += '<div style="font-weight: 600; font-size: 12px; color: #7a90a8; margin-top: 12px; margin-bottom: 6px; padding-left: 4px;">' + label + '</div>';
+    
+    const options = group.querySelectorAll('option');
+    options.forEach(opt => {
+      const value = opt.value;
+      const parts = value.split('|');
+      const type = parts[1] || 'e';
+      const vat = parts[2] || 'n';
+      const text = opt.textContent;
+      const [en, ar] = text.split(' — ');
+      
+      const typeBadge = type === 's' ? '<span style="background:#d4edda;color:#155724;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin-left:6px;">SALES</span>' :
+                        type === 'p' ? '<span style="background:#fff3cd;color:#856404;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin-left:6px;">PURCHASE</span>' :
+                        '<span style="background:#f8d7da;color:#721c24;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin-left:6px;">EXPENSE</span>';
+      
+      const vatBadge = vat === 'y' ? '<span style="background:#cfe2ff;color:#084298;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin-left:6px;">VAT</span>' :
+                       '<span style="background:#e2e3e5;color:#383d41;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin-left:6px;">NO VAT</span>';
+      
+      html += '<div style="padding:8px 12px;margin-bottom:4px;background:white;border-radius:6px;font-size:13px;display:flex;justify-content:space-between;align-items:center;border:1px solid #e2e7ef;">';
+      html += '<span style="font-weight:500;color:#1a2535;">' + (en || text) + typeBadge + vatBadge + '</span>';
+      html += '<span style="font-size:11px;color:#7a90a8;">' + (ar || '') + '</span>';
+      html += '</div>';
+    });
+  });
+  
+  container.innerHTML = html;
+}
+
+async function analyzeWithAI() {
+  const input = document.getElementById('ai-input');
+  const btn = document.getElementById('ai-analyze-btn');
+  const results = document.getElementById('ai-results');
+  
+  const userInput = input.value.trim();
+  if (!userInput) {
+    toast('⚠ Please describe what you want to track');
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.textContent = 'Analyzing...';
+  
+  results.innerHTML = '<div style="background:white;border-radius:12px;padding:24px;text-align:center;"><div style="border:3px solid #f3f4f6;border-top:3px solid #0e7864;border-radius:50%;width:24px;height:24px;animation:spin 1s linear infinite;margin:0 auto 12px;"></div><div style="color:#7a90a8;font-size:13px;">AI is analyzing your request...</div></div>';
+  
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: 'You are a Saudi accounting expert helping a supermarket owner add a new category to their bookkeeping app.\n\nUser wants to track: "' + userInput + '"\n\nAnalyze this and provide:\n1. Category name in English (short, professional)\n2. Category name in Arabic (proper translation)\n3. Transaction type: "sales" or "purchase" or "expense"\n4. VAT applicable: "yes" (subject to 15% VAT) or "no" (exempt)\n5. Category group (where it fits: Sales, Purchases/COGS, Payroll, Occupancy, Gov Fees, Technology, Operations, Professional Fees, Other)\n6. Brief explanation of WHY this VAT setting is correct under Saudi tax law\n\nRespond ONLY with a JSON object, no other text:\n{\n  "categoryEN": "...",\n  "categoryAR": "...",\n  "type": "expense",\n  "vat": "yes",\n  "group": "...",\n  "explanation": "..."\n}'
+        }]
+      })
+    });
+    
+    const data = await response.json();
+    const text = data.content[0].text;
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    
+    if (!jsonMatch) throw new Error('Invalid AI response format');
+    
+    const result = JSON.parse(jsonMatch[0]);
+    displayAIResult(result);
+    
+  } catch (error) {
+    results.innerHTML = '<div style="background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:16px;color:#856404;font-size:13px;">⚠ <strong>Error:</strong> ' + error.message + '<br>Make sure you\'re connected to the internet and the app is hosted on a web server (not file://).</div>';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✨ Analyze with AI';
+  }
+}
+
+function displayAIResult(result) {
+  var typeCode = result.type === 'sales' ? 's' : result.type === 'purchase' ? 'p' : 'e';
+  var vatCode = result.vat === 'yes' ? 'y' : 'n';
+  var htmlCode = '<option value="' + result.categoryEN + '|' + typeCode + '|' + vatCode + '">' + result.categoryEN + ' — ' + result.categoryAR + '</option>';
+  
+  var typeLabel = result.type === 'sales' ? 'SALES' : result.type === 'purchase' ? 'PURCHASE' : 'EXPENSE';
+  var typeBg = result.type === 'sales' ? '#d4edda' : result.type === 'purchase' ? '#fff3cd' : '#f8d7da';
+  var typeColor = result.type === 'sales' ? '#155724' : result.type === 'purchase' ? '#856404' : '#721c24';
+  var vatLabel = result.vat === 'yes' ? 'VAT' : 'NO VAT';
+  var vatBg = result.vat === 'yes' ? '#cfe2ff' : '#e2e3e5';
+  var vatColor = result.vat === 'yes' ? '#084298' : '#383d41';
+  
+  var resultHTML = '';
+  resultHTML += '<div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.08);margin-bottom:16px;">';
+  resultHTML += '<div style="font-size:15px;font-weight:600;margin-bottom:16px;color:#1a2535;">✅ AI Analysis Complete</div>';
+  resultHTML += '<div style="background:#f0f9f7;border:1px solid #b8e6dd;border-radius:8px;padding:16px;margin-bottom:12px;">';
+  resultHTML += '<h4 style="font-size:14px;color:#0e7864;margin-bottom:8px;">' + result.categoryEN + ' — ' + result.categoryAR + '</h4>';
+  resultHTML += '<p style="font-size:13px;color:#4a6080;margin-bottom:8px;"><strong>Category Group:</strong> ' + result.group + '</p>';
+  resultHTML += '<div style="display:flex;gap:12px;font-size:12px;">';
+  resultHTML += '<span style="background:' + typeBg + ';color:' + typeColor + ';padding:3px 10px;border-radius:12px;border:1px solid;">' + typeLabel + '</span>';
+  resultHTML += '<span style="background:' + vatBg + ';color:' + vatColor + ';padding:3px 10px;border-radius:12px;border:1px solid;">' + vatLabel + '</span>';
+  resultHTML += '</div></div>';
+  resultHTML += '<div style="background:#f9fafb;border:1px solid #e2e7ef;border-radius:8px;padding:16px;margin-bottom:16px;">';
+  resultHTML += '<div style="font-size:13px;font-weight:500;color:#1a2535;margin-bottom:8px;">📋 VAT Explanation</div>';
+  resultHTML += '<div style="font-size:13px;color:#4a6080;line-height:1.6;">' + result.explanation + '</div>';
+  resultHTML += '</div>';
+  resultHTML += '<div style="background:#f0f9f7;border:1px solid #0e7864;border-radius:8px;padding:16px;">';
+  resultHTML += '<h3 style="font-size:14px;color:#0e7864;margin-bottom:12px;">✓ Category Ready to Use</h3>';
+  resultHTML += '<p style="font-size:13px;margin-bottom:12px;color:#4a6080;">The AI has analyzed and prepared this category. Copy the code below:</p>';
+  resultHTML += '<div style="background:white;padding:12px;border-radius:6px;border:1px solid #d1e5de;overflow-x:auto;margin-bottom:12px;">';
+  resultHTML += '<pre style="margin:0;font-size:12px;line-height:1.6;font-family:monospace;white-space:pre-wrap;word-wrap:break-word;">' + htmlCode + '</pre>';
+  resultHTML += '</div>';
+  resultHTML += '<button id="ai-copy-btn" style="background:#0e7864;color:white;border:none;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;margin-right:8px;">📋 Copy Code</button>';
+  resultHTML += '<button onclick="showHowToAdd()" style="background:#e2e7ef;color:#4a6080;border:none;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;">📖 How to Add</button>';
+  resultHTML += '</div></div>';
+  
+  document.getElementById('ai-results').innerHTML = resultHTML;
+  
+  // Attach click handler after DOM is updated
+  setTimeout(function() {
+    var copyBtn = document.getElementById('ai-copy-btn');
+    if (copyBtn) {
+      copyBtn.onclick = function() { copyAICode(htmlCode); };
+    }
+  }, 10);
+}
+
+function copyAICode(code) {
+  const temp = document.createElement('textarea');
+  temp.value = code;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand('copy');
+  document.body.removeChild(temp);
+  toast('✅ Code copied to clipboard!');
+}
+
+function showHowToAdd() {
+  toast('💡 Open Kafeel_Books_App.html in a text editor, find the <select id="cat"> section, and paste the code in the appropriate <optgroup>');
+}
+
+// Load categories when AI view is shown
+const originalSV = sv;
+sv = function(view, btn) {
+  originalSV(view, btn);
+  if (view === 'ai') {
+    setTimeout(loadCurrentCategories, 100);
+  }
+};
+</script>
+
+<!-- GOOGLE DRIVE BAR (appended to body, shown at bottom) -->
+<div class="gd-bar" id="gdbar">
+  <div class="gd-status">
+    <div class="gd-dot grey" id="gddot"></div>
+    <span class="gd-msg" id="gdmsg">Not connected to Google Drive</span>
+  </div>
+  <button class="gd-btn" onclick="showGDModal('setup')" id="gd-connect-btn">🔗 Connect Google Drive</button>
+  <div class="gd-divider"></div>
+  <button class="gd-btn" id="gd-save-btn" onclick="gdSaveNow()" style="display:none">💾 Save Now</button>
+  <button class="gd-btn" id="gd-backup-btn" onclick="showGDModal('backups')" style="display:none">📁 Backups</button>
+  <button class="gd-btn danger" id="gd-disconnect-btn" onclick="gdDisconnect()" style="display:none">Disconnect</button>
+  <div class="gd-user" id="gd-user-info" style="display:none">
+    <img class="gd-avatar" id="gd-avatar" src="" alt="">
+    <span id="gd-username"></span>
+  </div>
+</div>
+
+<!-- SETUP MODAL -->
+<div class="modal-overlay" id="modal-setup" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <h2>🔗 Connect Google Drive — ربط جوجل درايف</h2>
+    <p class="sub">Your transaction data will auto-save to a file in your Google Drive after every entry. Works like a live backup.</p>
+    <div class="modal-step">
+      <div class="modal-step-num">1</div>
+      <div class="modal-step-txt">Click <b>Sign in with Google</b> below — a Google login window will open. Sign in with your Gmail account.</div>
+    </div>
+    <div class="modal-step">
+      <div class="modal-step-num">2</div>
+      <div class="modal-step-txt">Allow the app to access <b>Google Drive files</b> — this only creates/updates one file named <b id="gd-fname">Kafeel_Books_<span id="gd-yr-modal">1446</span>.json</b> in your Drive.</div>
+    </div>
+    <div class="modal-step">
+      <div class="modal-step-num">3</div>
+      <div class="modal-step-txt">After connecting, every transaction you add <b>auto-saves instantly</b> to Google Drive. You can open this app on any device and <b>restore your data</b> from Drive.</div>
+    </div>
+    <div style="background:var(--teal3);border:1px solid var(--border2);border-radius:var(--r2);padding:10px 13px;font-family:var(--mono);font-size:10px;color:var(--teal);margin-top:6px">
+      🔒 Your data stays in YOUR Google Drive. The app never sends data to any other server.
+    </div>
+    <div class="modal-btns">
+      <button class="gd-btn" onclick="document.getElementById('modal-setup').style.display='none'">Cancel</button>
+      <button class="gd-btn pri" onclick="gdSignIn()">🔑 Sign in with Google</button>
+    </div>
+  </div>
+</div>
+
+<!-- BACKUPS MODAL -->
+<div class="modal-overlay" id="modal-backups" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal">
+    <h2>📁 Drive Backups — النسخ الاحتياطية</h2>
+    <p class="sub">Your data is saved automatically. You can also create a manual backup snapshot at any time.</p>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <button class="gd-btn pri" onclick="gdManualBackup()">📸 Save snapshot now</button>
+      <button class="gd-btn" onclick="loadBackupList()">🔄 Refresh list</button>
+    </div>
+    <div class="backup-list" id="backup-list">
+      <div style="padding:16px;text-align:center;color:var(--text3);font-size:12px">Loading backups...</div>
+    </div>
+    <div class="modal-btns">
+      <button class="gd-btn" onclick="document.getElementById('modal-backups').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESTORE CONFIRM MODAL -->
+<div class="modal-overlay" id="modal-restore" style="display:none">
+  <div class="modal">
+    <h2>⚠️ Restore backup?</h2>
+    <p class="sub" id="restore-msg">This will replace all current data with the backup. Current data will be saved as a snapshot first.</p>
+    <div class="modal-btns">
+      <button class="gd-btn" onclick="document.getElementById('modal-restore').style.display='none'">Cancel</button>
+      <button class="gd-btn pri" onclick="confirmRestore()" style="background:var(--amber);border-color:var(--amber)">✓ Yes, restore</button>
+    </div>
+  </div>
+</div>
+
+<!-- FILE VIEWER -->
+<div class="viewer-overlay" id="viewer-overlay" onclick="if(event.target===this)closeViewer()">
+  <div class="viewer-box">
+    <div class="viewer-hdr">
+      <div class="viewer-title" id="viewer-title"></div>
+      <div class="viewer-hdr-btns">
+        <button class="att-btn" onclick="viewerDownload()" title="Download">⬇</button>
+        <button class="att-btn del" onclick="closeViewer()">✕</button>
+      </div>
+    </div>
+    <div class="viewer-body" id="viewer-body"></div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="exp-modal-overlay" id="exp-overlay" onclick="if(event.target===this)closeExpModal()">
+  <div class="exp-modal">
+    <div class="exp-modal-hdr">
+      <div class="exp-modal-title">Export Reports — تصدير التقارير</div>
+      <button class="att-btn del" onclick="closeExpModal()">✕</button>
+    </div>
+    <div class="exp-modal-body">
+
+      <!-- Format cards -->
+      <div class="exp-grid">
+
+        <div class="exp-card" onclick="selectExpFormat('csv')">
+          <span class="exp-card-ico">📊</span>
+          <div class="exp-card-title">CSV / Excel</div>
+          <div class="exp-card-sub">All transactions in a spreadsheet — open in Excel or Google Sheets</div>
+          <span class="exp-card-badge">ZATCA ready</span>
+        </div>
+
+        <div class="exp-card" onclick="selectExpFormat('print')">
+          <span class="exp-card-ico">🖨️</span>
+          <div class="exp-card-title">Print / PDF</div>
+          <div class="exp-card-sub">Print the reports page or save as PDF using your browser print dialog</div>
+        </div>
+
+        <div class="exp-card" onclick="selectExpFormat('vat')">
+          <span class="exp-card-ico">📋</span>
+          <div class="exp-card-title">VAT Return Summary</div>
+          <div class="exp-card-sub">Quarterly VAT figures ready to enter in the ZATCA portal</div>
+          <span class="exp-card-badge">Q1–Q4</span>
+        </div>
+
+        <div class="exp-card" onclick="selectExpFormat('zakat')">
+          <span class="exp-card-ico">🕌</span>
+          <div class="exp-card-title">Zakat Statement</div>
+          <div class="exp-card-sub">Annual Zakat calculation summary for the ZATCA Zakat return form</div>
+        </div>
+
+        <div class="exp-card" onclick="selectExpFormat('json')">
+          <span class="exp-card-ico">💾</span>
+          <div class="exp-card-title">Full Backup (JSON)</div>
+          <div class="exp-card-sub">Complete data backup including all attachments — restore anytime</div>
+        </div>
+
+        <div class="exp-card" onclick="selectExpFormat('html')">
+          <span class="exp-card-ico">📄</span>
+          <div class="exp-card-title">HTML Report</div>
+          <div class="exp-card-sub">Standalone report page — share by email or WhatsApp with your accountant</div>
+        </div>
+
+      </div>
+
+      <!-- Options panel -->
+      <div class="exp-options" id="exp-options">
+        <div class="exp-opt-title" id="exp-opt-title">Options</div>
+
+        <!-- Period filter -->
+        <div style="margin-bottom:10px">
+          <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px">Period — الفترة</div>
+          <div class="exp-period">
+            <select id="exp-period-type" onchange="updateExpOptions()">
+              <option value="all" id="exp-yr-opt">Full year 1446 — السنة كاملة</option>
+              <option value="q1">Q1 — ربع الأول</option>
+              <option value="q2">Q2 — ربع الثاني</option>
+              <option value="q3">Q3 — ربع الثالث</option>
+              <option value="q4">Q4 — ربع الرابع</option>
+              <option value="month">Specific month — شهر محدد</option>
+            </select>
+            <select id="exp-month-sel" style="display:none">
+              <option value="Muharram">Muharram — محرم</option>
+              <option value="Safar">Safar — صفر</option>
+              <option value="Rabi Al-Awwal">Rabi Al-Awwal</option>
+              <option value="Rabi Al-Thani">Rabi Al-Thani</option>
+              <option value="Jumada Al-Awwal">Jumada Al-Awwal</option>
+              <option value="Jumada Al-Thani">Jumada Al-Thani</option>
+              <option value="Rajab">Rajab — رجب</option>
+              <option value="Sha'ban">Sha'ban — شعبان</option>
+              <option value="Ramadan">Ramadan — رمضان</option>
+              <option value="Shawwal">Shawwal — شوال</option>
+              <option value="Dhul Qi'dah">Dhul Qi'dah</option>
+              <option value="Dhul Hijjah">Dhul Hijjah</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Include options -->
+        <div id="exp-include-opts"></div>
+      </div>
+
+      <div class="exp-footer">
+        <button class="exp-btn" onclick="closeExpModal()">Cancel</button>
+        <button class="exp-btn pri" id="exp-go-btn" onclick="runExport()">Export ↓</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
