@@ -1271,14 +1271,8 @@ function gdSilentRefresh() {
 async function gdConnected() {
   setGDStatus('amber', 'Connecting to Google Drive...');
   try {
-    // Get user info
-    const uRes = await gdFetch('https://www.googleapis.com/oauth2/v2/userinfo');
-    if (uRes.ok) {
-      gdUser = await uRes.json();
-      document.getElementById('gd-avatar').src = gdUser.picture || '';
-      document.getElementById('gd-username').textContent = gdUser.name || gdUser.email || '';
-      document.getElementById('gd-user-info').style.display = 'flex';
-    }
+    // Skip user info - not needed, just connect to Drive directly
+    // (Removed userinfo call to avoid scope issues)
 
     // Find or create the main data file
     await gdFindOrCreateFile();
